@@ -1,0 +1,1090 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Guia de tallat</title>
+<meta name="description" content="Com instal·lar i fer servir tallat, l'editor de reels en català. Versió 0.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
+<style>[hidden]:not([hidden=until-found i]){display:none!important}img{max-width:100%}body{margin:0}</style>
+</head>
+<body>
+
+<style>
+/* Portada a sang amb la textura de cafè (parallax) i un vidre de crema al damunt; la resta, una columna de
+   lectura amb seccions més amples quan hi ha maquetes. Paper de flat white, text marró espresso, accent
+   blau cel. Lletra del sistema, com a Apple. */
+:root {
+  --fons: #f6eee0;          /* flat white */
+  --fons-2: #efe4d1;        /* una mica més torrat, per alternar seccions */
+  --rentat: #dcebf6;        /* rentat de blau cel per a una secció */
+  --superficie: #fffaf2;
+  --text: #3a2418;          /* espresso */
+  --text-2: #6f5646;
+  --text-3: #9a8576;
+  --linia: rgba(58, 36, 24, 0.13);
+  --omplir: rgba(58, 36, 24, 0.06);
+  --accent: #a7d3f2;        /* blau cel: farcits, píndoles, ressaltats */
+  --accent-fort: #2b6a9b;   /* blau cel per a text i enllaços sobre crema */
+  --accent-text: #20323f;   /* text sobre el blau cel */
+  --vidre: rgba(246, 238, 224, 0.74);
+  --vidre-portada: rgba(250, 244, 233, 0.72);
+  --vora-vidre: rgba(255, 255, 255, 0.45);
+  --boto: #3a2418;
+  --boto-text: #f6eee0;
+  --pantalla: #2a1b14;      /* el marc dels mòbils dibuixats */
+  --app-taronja: #c93400;   /* només dins del dibuix de la pàgina de tallat: és com es veu de debò */
+  --app-groc: #ffcc00;
+  --app-groc-suau: rgba(255, 204, 0, 0.24);
+  --claude: #d97757;
+  --focus: rgba(43, 106, 155, 0.5);
+  --ombra: 0 1px 2px rgba(58, 36, 24, 0.06), 0 10px 30px rgba(58, 36, 24, 0.1);
+  --ombra-gran: 0 2px 6px rgba(58, 36, 24, 0.08), 0 28px 70px rgba(58, 36, 24, 0.22);
+  --capa-portada: none;
+  --wm-clar: block;
+  --wm-fosc: none;
+
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Helvetica Neue", Arial, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+
+  --t-peu: 0.8125rem;
+  --t-cos: 1.0625rem;
+  --t-lead: 1.25rem;
+  --t-h3: 1.1875rem;
+  --t-h2: clamp(1.875rem, 1.3rem + 2.4vw, 2.75rem);
+  --t-h1: clamp(2.25rem, 1.3rem + 3.6vw, 3.75rem);
+
+  --ample-text: 42rem;
+  --ample-pagina: 68rem;
+  --molla: cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --fons: #1d1410; --fons-2: #241912; --rentat: #1b2630; --superficie: #2a1e18;
+    --text: #f3e8d8; --text-2: #cbb9a4; --text-3: #9c8a7a;
+    --linia: rgba(243, 232, 216, 0.14); --omplir: rgba(243, 232, 216, 0.07);
+    --accent: #a7d3f2; --accent-fort: #a7d3f2; --accent-text: #14222d;
+    --vidre: rgba(29, 20, 16, 0.76); --vidre-portada: rgba(29, 20, 16, 0.66); --vora-vidre: rgba(243, 232, 216, 0.16);
+    --boto: #f3e8d8; --boto-text: #2a1b14; --pantalla: #120c09;
+    --app-taronja: #ff9f0a; --app-groc: #ffd60a; --app-groc-suau: rgba(255, 214, 10, 0.18);
+    --focus: rgba(167, 211, 242, 0.6);
+    --ombra: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 30px rgba(0, 0, 0, 0.4);
+    --ombra-gran: 0 2px 6px rgba(0, 0, 0, 0.4), 0 28px 70px rgba(0, 0, 0, 0.6);
+    --capa-portada: linear-gradient(rgba(29, 20, 16, 0.38), rgba(29, 20, 16, 0.38));
+    --wm-clar: none; --wm-fosc: block;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --fons: #1d1410; --fons-2: #241912; --rentat: #1b2630; --superficie: #2a1e18;
+  --text: #f3e8d8; --text-2: #cbb9a4; --text-3: #9c8a7a;
+  --linia: rgba(243, 232, 216, 0.14); --omplir: rgba(243, 232, 216, 0.07);
+  --accent: #a7d3f2; --accent-fort: #a7d3f2; --accent-text: #14222d;
+  --vidre: rgba(29, 20, 16, 0.76); --vidre-portada: rgba(29, 20, 16, 0.66); --vora-vidre: rgba(243, 232, 216, 0.16);
+  --boto: #f3e8d8; --boto-text: #2a1b14; --pantalla: #120c09;
+  --app-taronja: #ff9f0a; --app-groc: #ffd60a; --app-groc-suau: rgba(255, 214, 10, 0.18);
+  --focus: rgba(167, 211, 242, 0.6);
+  --ombra: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 30px rgba(0, 0, 0, 0.4);
+  --ombra-gran: 0 2px 6px rgba(0, 0, 0, 0.4), 0 28px 70px rgba(0, 0, 0, 0.6);
+  --capa-portada: linear-gradient(rgba(29, 20, 16, 0.38), rgba(29, 20, 16, 0.38));
+  --wm-clar: none; --wm-fosc: block;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+body {
+  margin: 0; background: var(--fons); color: var(--text);
+  font: var(--t-cos)/1.55 var(--font);
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+a { color: var(--accent-fort); text-decoration-color: currentColor; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 6px; }
+p { margin: 0; text-wrap: pretty; }
+strong { font-weight: 600; }
+h3 { margin: 0; font: 600 var(--t-h3)/1.3 var(--font-display); letter-spacing: -0.01em; }
+.simbols { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.ample, .columna {
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.ample { max-width: calc(var(--ample-pagina) + 32px); }
+.columna { max-width: calc(var(--ample-text) + 32px); }
+/* Dins d'una secció ampla, tot comença al mateix marge esquerre: els títols, els passos i les targetes. */
+.ample .columna { padding-left: 0; padding-right: 0; max-width: var(--ample-text); margin-inline: 0; }
+.mig { max-width: 56rem; margin-inline: 0; }
+.wm { display: block; width: 100%; height: auto; }
+.wm-clar { display: var(--wm-clar); }
+.wm-fosc { display: var(--wm-fosc); }
+
+/* --- Barra de vidre --- */
+.barra {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: var(--vidre);
+  -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--linia);
+}
+.barra .ample { display: flex; align-items: center; gap: 20px; height: 52px; }
+.barra .marca { flex: none; display: block; width: 64px; }
+.barra nav { min-width: 0; overflow-x: auto; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
+.barra nav::-webkit-scrollbar { display: none; }
+.barra ul { display: flex; gap: 18px; list-style: none; margin: 0; padding: 0 24px 0 0; white-space: nowrap; }
+.barra a { font-size: var(--t-peu); color: var(--text-2); text-decoration: none; }
+.barra a:hover { color: var(--text); }
+
+/* --- Portada --- */
+.portada { position: relative; overflow: hidden; isolation: isolate; }
+/* La textura es fon amb el paper amb una corba suau: una màscara sobre una capa quieta, perquè el
+   parallax de dins no mogui on comença el fos. */
+.fons-portada {
+  position: absolute; inset: 0; z-index: -2; overflow: hidden;
+  --fos: linear-gradient(180deg, #000 0%, #000 46%, rgba(0, 0, 0, 0.95) 53%, rgba(0, 0, 0, 0.84) 60%,
+    rgba(0, 0, 0, 0.67) 67%, rgba(0, 0, 0, 0.48) 74%, rgba(0, 0, 0, 0.3) 81%, rgba(0, 0, 0, 0.15) 88%,
+    rgba(0, 0, 0, 0.05) 94%, transparent 100%);
+  -webkit-mask-image: var(--fos); mask-image: var(--fos);
+}
+.fons-portada::after { content: ""; position: absolute; inset: 0; background: var(--capa-portada); pointer-events: none; }
+.textura {
+  position: absolute; inset: -12% -4%;
+  background: url("textura-cafe.jpg") center / cover no-repeat;
+  will-change: transform;
+}
+.portada > .ample { padding-block: clamp(36px, 7vw, 96px) clamp(56px, 8vw, 112px); display: grid; gap: 40px; }
+.vidre {
+  background: var(--vidre-portada); border-radius: 28px;
+  -webkit-backdrop-filter: blur(22px) saturate(150%); backdrop-filter: blur(22px) saturate(150%);
+  border: 1px solid var(--vora-vidre);
+  padding: clamp(24px, 4vw, 44px); display: grid; gap: 22px; align-content: start; min-width: 0;
+  box-shadow: var(--ombra);
+}
+.vidre .marca-gran { width: min(100%, 22rem); }
+.portada h1 { margin: 0; font: 700 var(--t-h1)/1.04 var(--font-display); letter-spacing: -0.03em; text-wrap: balance; }
+.portada .lead { font-size: var(--t-lead); line-height: 1.45; color: var(--text-2); max-width: 32rem; }
+.portada .meta { font-size: var(--t-peu); color: var(--text-3); }
+.pindoles { display: flex; flex-wrap: wrap; gap: 10px; }
+.pindola {
+  display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+  font: 600 0.9375rem/1 var(--font); padding: 13px 20px; border-radius: 99px;
+  background: var(--boto); color: var(--boto-text); transition: transform 0.2s var(--molla);
+}
+.pindola.secundaria { background: var(--accent); color: var(--accent-text); }
+.pindola:active { transform: scale(0.97); }
+.escena { position: relative; display: grid; align-items: center; min-height: 26rem; min-width: 0; }
+@media (min-width: 900px) {
+  .portada > .ample { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); align-items: center; column-gap: 48px; }
+}
+
+/* La prova: una frase com a la pàgina d'editar */
+.prova {
+  position: relative; z-index: 2; width: min(100%, 26rem);
+  background: var(--superficie); border-radius: 24px; box-shadow: var(--ombra-gran);
+  padding: 22px 24px; display: grid; gap: 14px;
+}
+.etiq { margin: 0; font-size: 0.75rem; font-weight: 600; color: var(--text-3); letter-spacing: 0.06em; text-transform: uppercase; }
+.frase { font-size: 1.3125rem; line-height: 1.75; }
+.mot {
+  position: relative; font: inherit; color: inherit; background: none; border: 0;
+  padding: 1px 2px; margin: 0 -2px; border-radius: 5px; cursor: pointer; transition: color 0.25s;
+}
+.mot::after {
+  content: ""; position: absolute; left: 1px; right: 1px; top: 54%; height: 2px; border-radius: 2px;
+  background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform 0.35s var(--molla);
+}
+.mot:hover { background: var(--omplir); }
+.mot[aria-pressed="true"] { color: var(--text-3); }
+.mot[aria-pressed="true"]::after { transform: scaleX(1); }
+.compte { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 14px; border-top: 1px solid var(--linia); padding-top: 12px; }
+.durada { font: 600 1.25rem/1 var(--font-display); font-variant-numeric: tabular-nums; }
+.durada s { color: var(--text-3); font-weight: 400; }
+.compte small { font-size: var(--t-peu); color: var(--text-2); }
+
+/* Mòbil amb subtítols animats */
+.mobil {
+  position: relative; width: 11.5rem; aspect-ratio: 9 / 18.5; border-radius: 30px;
+  background: var(--pantalla); padding: 8px; box-shadow: var(--ombra-gran);
+}
+.mobil .video {
+  position: absolute; inset: 8px; border-radius: 23px; overflow: hidden;
+  background: radial-gradient(120% 70% at 30% 20%, #c98a52 0%, #8a5532 45%, #3b2116 100%);
+}
+.mobil .video::before { /* una llum de cafè, per no posar-hi ningú */
+  content: ""; position: absolute; left: 50%; top: 34%; width: 46%; aspect-ratio: 1; translate: -50% 0;
+  border-radius: 50%; background: radial-gradient(circle, rgba(255, 238, 210, 0.85) 0 38%, rgba(255, 238, 210, 0) 70%);
+  filter: blur(2px); animation: respira 6s ease-in-out infinite;
+}
+.karaoke {
+  position: absolute; left: 10px; right: 10px; bottom: 22%; margin: 0; text-align: center;
+  font: 800 1.05rem/1.15 var(--font-display); color: #fff; letter-spacing: -0.01em;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+.karaoke span { display: inline-block; animation: diu 4.8s infinite; }
+.karaoke span:nth-child(2) { animation-delay: 0.4s; }
+.karaoke span:nth-child(3) { animation-delay: 0.8s; }
+.karaoke span:nth-child(4) { animation-delay: 1.2s; }
+.karaoke span:nth-child(5) { animation-delay: 1.6s; }
+.karaoke span:nth-child(6) { animation-delay: 2s; }
+@keyframes diu { 0%, 6% { color: #fff; transform: none; } 8%, 16% { color: #a7d3f2; transform: translateY(-2px) scale(1.08); } 20%, 100% { color: #fff; transform: none; } }
+@keyframes respira { 50% { scale: 1.08; opacity: 0.8; } }
+.portada .mobil { position: absolute; right: 0; top: 50%; margin-top: -11.8rem; z-index: 1; }
+.portada .escena .mobil { rotate: 5deg; }
+.portada .prova { justify-self: start; margin-right: 8rem; rotate: -2deg; transition: rotate 0.4s var(--molla); }
+.portada .prova:hover { rotate: 0deg; }
+@media (max-width: 899px) {
+  .escena { min-height: 0; padding-top: 8px; }
+  .portada .escena .mobil { display: none; }
+  .portada .prova { margin: 0; rotate: 0deg; }
+}
+
+/* --- Seccions --- */
+main section { padding-block: clamp(64px, 10vw, 120px); }
+main section.torrat { background: var(--fons-2); }
+main section.rentat { background: var(--rentat); }
+.capcal { display: grid; gap: 12px; margin-bottom: clamp(32px, 5vw, 48px); }
+.num { font-size: 0.75rem; font-weight: 600; color: var(--accent-fort); letter-spacing: 0.08em; text-transform: uppercase; }
+h2 { margin: 0; font: 700 var(--t-h2)/1.08 var(--font-display); letter-spacing: -0.025em; text-wrap: balance; }
+.capcal p { font-size: var(--t-lead); line-height: 1.45; color: var(--text-2); }
+.flux { display: grid; gap: 18px; }
+.flux > p { color: var(--text-2); }
+.mes-aire { margin-top: clamp(40px, 6vw, 64px); }
+
+.targeta {
+  background: var(--superficie); border-radius: 24px; box-shadow: var(--ombra);
+  padding: 24px; display: grid; gap: 10px; align-content: start; min-width: 0;
+  transition: transform 0.35s var(--molla), box-shadow 0.35s var(--molla);
+}
+.targeta:hover { transform: translateY(-3px); box-shadow: var(--ombra-gran); }
+.targeta p { color: var(--text-2); }
+.graella { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr)); }
+.graella-3 { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+.icona { width: 44px; height: 44px; border-radius: 13px; display: grid; place-items: center; background: var(--accent); color: var(--accent-text); }
+.icona svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.icona svg.ple { fill: currentColor; stroke: none; }
+.etiqueta {
+  justify-self: start; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em;
+  padding: 3px 10px; border-radius: 99px; background: var(--omplir); color: var(--text-2);
+}
+.etiqueta.blau { background: var(--accent); color: var(--accent-text); }
+.fila { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+
+.nota { display: grid; gap: 6px; padding: 18px 22px; border-radius: 20px; background: var(--superficie); box-shadow: var(--ombra); }
+.nota p { color: var(--text-2); }
+.nota.blava { background: var(--accent); box-shadow: none; }
+.nota.blava strong, .nota.blava p { color: var(--accent-text); }
+.nota.amb-insignia { grid-template-columns: auto minmax(0, 1fr); align-items: center; column-gap: 22px; padding: 26px 28px; }
+.text-nota { display: grid; gap: 6px; }
+.v0 {
+  width: 64px; height: 64px; border-radius: 18px; display: grid; place-items: center;
+  background: var(--accent); color: var(--accent-text); font: 800 1.5rem/1 var(--font-display); letter-spacing: -0.02em;
+  rotate: -6deg;
+}
+
+/* Com funciona: tres passos amb fletxes dibuixades */
+.cami { display: grid; gap: 16px; grid-template-columns: 1fr; align-items: stretch; }
+.cami .targeta { text-align: center; justify-items: center; }
+.cami .gran { font: 700 1.5rem/1 var(--font-display); letter-spacing: -0.02em; }
+.fletxa { width: 64px; height: 32px; justify-self: center; align-self: center; color: var(--accent-fort); rotate: 90deg; }
+.fletxa path { fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+@media (min-width: 760px) {
+  .cami { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr); }
+  .fletxa { rotate: 0deg; }
+}
+
+/* Passos d'una seqüència de debò */
+.passos { list-style: none; counter-reset: pas; margin: 0; padding: 0; display: grid; gap: 30px; }
+.passos > li { counter-increment: pas; display: grid; grid-template-columns: 2.4rem minmax(0, 1fr); gap: 6px 16px; }
+.passos > li::before {
+  content: counter(pas); grid-row: span 2; width: 2.4rem; height: 2.4rem; border-radius: 50%;
+  display: grid; place-items: center; background: var(--boto); color: var(--boto-text);
+  font: 600 1rem/1 var(--font-display); font-variant-numeric: tabular-nums;
+}
+.passos > li > * { grid-column: 2; min-width: 0; }
+.passos > li > h3 { align-self: center; min-height: 2.4rem; display: flex; align-items: center; }
+.passos > li > div { display: grid; gap: 12px; color: var(--text-2); }
+.passos > li > div strong { color: var(--text); }
+.dos-cols { display: grid; gap: 40px; }
+@media (min-width: 960px) { .dos-cols { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; } .dos-cols .enganxa { position: sticky; top: 90px; } }
+
+/* Triar: Claude o ChatGPT */
+.tria, .contacte { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+.tria .targeta, .contacte .targeta { grid-template-columns: 52px minmax(0, 1fr); column-gap: 16px; align-items: center; text-decoration: none; color: inherit; }
+.tria .targeta > :not(.logo), .contacte .targeta > :not(.logo) { grid-column: 2; }
+.logo { grid-row: span 3; align-self: start; width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; background: var(--fons); border: 1px solid var(--linia); color: var(--text); }
+.logo svg { width: 30px; height: 30px; fill: currentColor; }
+.logo.claude svg { fill: var(--claude); }
+.logo svg.linia { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; width: 26px; height: 26px; }
+.contacte .gran { font: 700 1.25rem/1.2 var(--font-display); color: var(--accent-fort); overflow-wrap: anywhere; }
+
+/* Finestra (dibuix) */
+.finestra { background: var(--superficie); border: 1px solid var(--linia); border-radius: 16px; box-shadow: var(--ombra-gran); overflow: hidden; }
+.finestra .punts { display: flex; align-items: center; gap: 6px; padding: 11px 14px; border-bottom: 1px solid var(--linia); }
+.finestra .punts i { width: 11px; height: 11px; border-radius: 50%; background: var(--omplir); border: 1px solid var(--linia); }
+.finestra .punts span { margin-inline: auto; font-size: 0.75rem; color: var(--text-3); padding-right: 48px; }
+.app { padding: 18px; display: grid; gap: 16px; min-height: 17rem; align-content: space-between; }
+.modes { justify-self: center; display: flex; gap: 2px; padding: 3px; border-radius: 99px; background: var(--omplir); font-size: 0.8125rem; }
+.modes span { padding: 6px 14px; border-radius: 99px; color: var(--text-2); }
+.modes .actiu { background: var(--accent); color: var(--accent-text); font-weight: 600; position: relative; }
+.modes .actiu::after {
+  content: ""; position: absolute; left: 50%; bottom: -14px; width: 10px; height: 10px; translate: -50% 0;
+  border-radius: 50%; background: var(--accent-fort); opacity: 0.4; animation: polsa 2.4s ease-out infinite;
+}
+@keyframes polsa { 0% { scale: 0.6; opacity: 0.6; } 100% { scale: 2.4; opacity: 0; } }
+.bombolla-claude { justify-self: start; max-width: 88%; display: flex; gap: 10px; align-items: flex-start; color: var(--text-2); font-size: 0.875rem; }
+.bombolla-claude svg { width: 18px; height: 18px; flex: none; fill: var(--claude); margin-top: 2px; }
+.compositor {
+  display: flex; align-items: center; gap: 10px; border: 1px solid var(--linia); border-radius: 16px;
+  padding: 12px 12px 12px 16px; background: var(--fons); min-width: 0;
+}
+.compositor code { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; font: 0.875rem/1.4 var(--mono); color: var(--text); }
+.compositor code::after { content: ""; display: inline-block; width: 2px; height: 1.05em; margin-left: 1px; vertical-align: -2px; background: var(--accent-fort); animation: cursor 1s steps(1) infinite; }
+@keyframes cursor { 50% { opacity: 0; } }
+.envia { flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--boto); display: grid; place-items: center; }
+.envia svg { width: 14px; height: 14px; fill: none; stroke: var(--boto-text); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Ordres per copiar */
+.ordres { display: grid; gap: 8px; }
+.ordre { display: flex; align-items: center; gap: 10px; min-width: 0; background: var(--superficie); border: 1px solid var(--linia); border-radius: 14px; padding: 10px 10px 10px 14px; }
+.ordre code { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; font: 0.9375rem/1.4 var(--mono); color: var(--text); }
+.copia { flex: none; font: 600 0.8125rem/1 var(--font); color: var(--accent-text); background: var(--accent); border: 0; border-radius: 99px; padding: 9px 15px; cursor: pointer; transition: transform 0.15s; }
+.copia:active { transform: scale(0.96); }
+
+/* Desplegables */
+details { border-bottom: 1px solid var(--linia); }
+details:first-of-type { border-top: 1px solid var(--linia); }
+summary { list-style: none; cursor: pointer; padding: 18px 34px 18px 0; position: relative; font: 600 var(--t-h3)/1.35 var(--font-display); letter-spacing: -0.01em; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: ""; position: absolute; right: 6px; top: 50%; width: 9px; height: 9px; margin-top: -7px; border-right: 2px solid var(--text-3); border-bottom: 2px solid var(--text-3); transform: rotate(45deg); transition: transform 0.25s var(--molla); }
+details[open] summary::after { transform: rotate(-135deg); margin-top: -2px; }
+details > div { display: grid; gap: 12px; padding: 0 0 22px; color: var(--text-2); }
+details > div strong { color: var(--text); }
+
+/* La pàgina d'editar (dibuix) */
+.pagina-tallat .dins { display: grid; grid-template-columns: 8rem minmax(0, 1fr) 9rem; min-height: 17rem; }
+.costat { border-right: 1px solid var(--linia); padding: 14px 10px; display: grid; gap: 4px; align-content: start; font-size: 0.8125rem; color: var(--text-2); }
+.costat span { padding: 6px 9px; border-radius: 8px; }
+.costat span:first-child { background: var(--omplir); color: var(--text); font-weight: 600; }
+.texte { padding: 18px 20px; font-size: 0.9375rem; line-height: 1.8; }
+.pausa { font-size: 0.7rem; color: var(--text-3); background: var(--omplir); padding: 1px 6px; border-radius: 99px; vertical-align: 1px; }
+.tret { color: var(--text-3); text-decoration: line-through; }
+.tret-sol { color: var(--app-taronja); text-decoration: line-through; }
+.proposta { box-shadow: inset 0 -2px 0 var(--app-groc); background: var(--app-groc-suau); border-radius: 3px; padding: 0 2px; }
+.pagina-tallat .dreta { border-left: 1px solid var(--linia); padding: 14px; display: grid; place-items: center; gap: 10px; }
+.pagina-tallat .mobil { width: 6.6rem; border-radius: 18px; padding: 5px; }
+.pagina-tallat .mobil .video { inset: 5px; border-radius: 14px; }
+.pagina-tallat .karaoke { font-size: 0.62rem; bottom: 20%; left: 6px; right: 6px; }
+.interruptor { display: flex; align-items: center; gap: 6px; font-size: 0.6875rem; color: var(--text-2); }
+.interruptor i { width: 22px; height: 13px; border-radius: 99px; background: var(--accent-fort); position: relative; }
+.interruptor i::after { content: ""; position: absolute; right: 2px; top: 2px; width: 9px; height: 9px; border-radius: 50%; background: #fff; }
+.peus { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; font-size: var(--t-peu); color: var(--text-2); margin-top: 12px; }
+@media (max-width: 640px) {
+  .pagina-tallat .dins { grid-template-columns: minmax(0, 1fr) 6.5rem; }
+  .costat { display: none; }
+  .peus { grid-template-columns: 1fr; }
+}
+
+/* Full d'exportar (dibuix) */
+.full { background: var(--superficie); border-radius: 22px; box-shadow: var(--ombra-gran); padding: 18px; display: grid; gap: 10px; width: min(100%, 22rem); }
+.full .opcio { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; align-items: center; padding: 12px 14px; border-radius: 14px; border: 1px solid var(--linia); }
+.full .opcio b { font-weight: 600; font-size: 0.9375rem; }
+.full .opcio span { grid-column: 1; font-size: 0.8125rem; color: var(--text-2); }
+.full .opcio em { grid-row: 1 / span 2; grid-column: 2; font-style: normal; font-size: 0.75rem; color: var(--text-3); }
+.full .opcio.triada { border-color: var(--accent-fort); background: var(--rentat); }
+.barra-progres { height: 6px; border-radius: 99px; background: var(--omplir); overflow: hidden; }
+.barra-progres i { display: block; height: 100%; width: 100%; border-radius: inherit; background: var(--accent-fort); transform-origin: left; animation: omple 5s var(--molla) infinite; }
+@keyframes omple { 0% { transform: scaleX(0.04); } 70%, 100% { transform: scaleX(1); } }
+.full small { font-size: 0.75rem; color: var(--text-2); }
+
+/* Dreceres */
+.dreceres { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 0 32px; margin: 0; }
+.dreceres > div { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--linia); min-width: 0; }
+.dreceres dt { color: var(--text-2); min-width: 0; }
+.dreceres dd { margin: 0; flex: none; display: flex; gap: 4px; align-items: center; color: var(--text-3); font-size: var(--t-peu); }
+kbd { display: inline-block; min-width: 1.7em; padding: 1px 6px; text-align: center; font: 500 0.875rem/1.5 var(--font); color: var(--text); background: var(--superficie); border: 1px solid var(--linia); border-bottom-width: 2px; border-radius: 6px; }
+
+/* Funcions: targetes amb un petit dibuix animat */
+.visual { height: 7.5rem; border-radius: 16px; background: var(--fons); display: grid; place-items: center; overflow: hidden; margin-bottom: 6px; position: relative; }
+.v-neteja { font-size: 1.05rem; padding: 0 14px; text-align: center; line-height: 1.6; }
+.v-neteja s { color: var(--text-3); text-decoration-thickness: 2px; text-decoration-color: var(--accent-fort); }
+.v-ona { display: flex; align-items: center; gap: 4px; height: 56px; }
+.v-ona i { width: 5px; height: 100%; border-radius: 99px; background: var(--accent-fort); animation: ona 1.3s ease-in-out infinite; }
+.v-ona i:nth-child(odd) { animation-duration: 1.7s; }
+.v-ona i:nth-child(3n) { animation-delay: -0.4s; }
+.v-ona i:nth-child(4n) { animation-delay: -0.9s; }
+.v-ona i.silenci { background: var(--linia); animation: none; transform: scaleY(0.12); }
+@keyframes ona { 0%, 100% { transform: scaleY(0.25); } 50% { transform: scaleY(1); } }
+.v-reels { display: flex; gap: 10px; }
+.v-reels i { width: 2.6rem; aspect-ratio: 9 / 16; border-radius: 9px; background: radial-gradient(90% 60% at 40% 30%, #c98a52, #5a3220); box-shadow: var(--ombra); transition: rotate 0.4s var(--molla), translate 0.4s var(--molla); }
+.v-reels i:nth-child(1) { rotate: -8deg; translate: 0 6px; }
+.v-reels i:nth-child(3) { rotate: 8deg; translate: 0 6px; }
+.targeta:hover .v-reels i:nth-child(1) { rotate: -14deg; translate: -6px 8px; }
+.targeta:hover .v-reels i:nth-child(3) { rotate: 14deg; translate: 6px 8px; }
+.v-noti { width: 82%; background: var(--superficie); border-radius: 14px; box-shadow: var(--ombra); padding: 10px 12px; display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 2px 10px; font-size: 0.75rem; animation: baixa 4s var(--molla) infinite; }
+.v-noti i { grid-row: span 2; width: 26px; height: 26px; border-radius: 7px; background: var(--accent); }
+.v-noti b { font-weight: 600; }
+.v-noti span { color: var(--text-2); }
+@keyframes baixa { 0% { transform: translateY(-140%); } 18%, 80% { transform: none; } 100% { transform: translateY(-140%); } }
+.v-estil { display: flex; gap: 8px; align-items: center; }
+.v-estil i { width: 30px; height: 30px; border-radius: 50%; box-shadow: var(--ombra); border: 2px solid var(--superficie); }
+.v-estil span { font: 800 1.5rem/1 var(--font-display); letter-spacing: -0.02em; margin-left: 6px; }
+.mini .mobil { width: 4.6rem; border-radius: 14px; padding: 4px; }
+.mini .mobil .video { inset: 4px; border-radius: 11px; }
+.mini .karaoke { font-size: 0.5rem; left: 4px; right: 4px; }
+.funcions-llista { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 0 36px; }
+.funcions-llista li { padding: 16px 0; border-top: 1px solid var(--linia); display: grid; gap: 4px; }
+.funcions-llista p { color: var(--text-2); }
+
+/* Instruccions de veu: un bloc destacat, amb cada ordre com una bombolla del que dius */
+.destacat { background: var(--rentat); border-radius: 32px; padding: clamp(24px, 4vw, 48px); display: grid; gap: 28px; }
+.destacat-cap { display: grid; gap: 10px; max-width: 40rem; }
+.titol-destacat { font: 700 clamp(1.5rem, 1.1rem + 1.4vw, 2rem)/1.15 var(--font-display); letter-spacing: -0.02em; }
+.destacat-cap p { color: var(--text-2); font-size: var(--t-lead); line-height: 1.45; }
+.ordres-veu { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(13.5rem, 1fr)); }
+.ordre-veu { display: grid; gap: 12px; align-content: start; }
+.ordre-veu .diu { background: var(--superficie); border-radius: 20px 20px 20px 6px; padding: 14px 16px; box-shadow: var(--ombra); font: 600 1.0625rem/1.35 var(--font-display); }
+.ordre-veu .diu b { color: var(--accent-fort); font-weight: 700; }
+.ordre-veu > p:not(.diu) { color: var(--text-2); padding-left: 6px; }
+.truc { color: var(--text-2); }
+.truc strong { color: var(--text); }
+.mes-aire-gran { margin-top: clamp(64px, 9vw, 104px); }
+.subtitol { font: 700 clamp(1.375rem, 1.1rem + 1vw, 1.75rem)/1.2 var(--font-display); letter-spacing: -0.02em; margin-bottom: 20px; }
+
+/* Què ve després */
+.idees { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+.idees .targeta { padding: 20px; }
+
+/* Convida'm a un tallat: el bloc de les donacions (Ko-fi), just abans del peu */
+.convida {
+  background: var(--accent); color: var(--accent-text); border-radius: 32px;
+  padding: clamp(28px, 5vw, 56px); display: grid; gap: 24px; align-items: center;
+}
+.convida .num { color: var(--accent-text); opacity: 0.75; }
+.convida h2 { color: var(--accent-text); max-width: 22ch; }
+.convida p { color: var(--accent-text); opacity: 0.85; max-width: 36rem; font-size: var(--t-lead); line-height: 1.45; }
+.convida-text { display: grid; gap: 12px; min-width: 0; }
+.convida .pindola { justify-self: start; font-size: 1.0625rem; padding: 16px 26px; }
+@media (min-width: 860px) { .convida { grid-template-columns: minmax(0, 1fr) auto; } }
+
+/* Peu */
+.peu { background: var(--fons-2); }
+.peu .ample { padding-block: 64px 72px; display: grid; justify-items: center; gap: 14px; text-align: center; }
+.marca-peu { width: 10rem; }
+/* Comentaris: un missatge directe d'exemple, com es veuria enviat */
+.exemple-missatge { display: grid; gap: 14px; max-width: 34rem; }
+.dm { justify-self: end; max-width: 26rem; background: var(--accent); color: var(--accent-text); border-radius: 22px 22px 6px 22px; padding: 14px 18px; box-shadow: var(--ombra); }
+.dm p { font-size: 1.0625rem; line-height: 1.45; }
+.peu-dm { color: var(--text-2); }
+.peu p { color: var(--text-2); font-size: var(--t-peu); }
+.peu .signa { font: 600 var(--t-h3)/1.3 var(--font-display); color: var(--text); }
+
+/* Entrades suaus en fer scroll: només es mouen (mai no s'amaguen), així la pàgina és sencera en repòs. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .puja { animation: puja linear both; animation-timeline: view(); animation-range: entry 0% entry 55%; }
+    @keyframes puja { from { transform: translateY(36px) scale(0.98); } to { transform: none; } }
+    .fletxa path { stroke-dasharray: 120; animation: dibuixa linear both; animation-timeline: view(); animation-range: entry 10% cover 40%; }
+    @keyframes dibuixa { from { stroke-dashoffset: 120; } to { stroke-dashoffset: 0; } }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+
+<svg class="simbols" aria-hidden="true">
+  <symbol id="s-claude" viewBox="0 0 100 100"><path d="m19.6 66.5 19.7-11 .3-1-.3-.5h-1l-3.3-.2-11.2-.3L14 53l-9.5-.5-2.4-.5L0 49l.2-1.5 2-1.3 2.9.2 6.3.5 9.5.6 6.9.4L38 49.1h1.6l.2-.7-.5-.4-.4-.4L29 41l-10.6-7-5.6-4.1-3-2-1.5-2-.6-4.2 2.7-3 3.7.3.9.2 3.7 2.9 8 6.1L37 36l1.5 1.2.6-.4.1-.3-.7-1.1L33 25l-6-10.4-2.7-4.3-.7-2.6c-.3-1-.4-2-.4-3l3-4.2L28 0l4.2.6L33.8 2l2.6 6 4.1 9.3L47 29.9l2 3.8 1 3.4.3 1h.7v-.5l.5-7.2 1-8.7 1-11.2.3-3.2 1.6-3.8 3-2L61 2.6l2 2.9-.3 1.8-1.1 7.7L59 27.1l-1.5 8.2h.9l1-1.1 4.1-5.4 6.9-8.6 3-3.5L77 13l2.3-1.8h4.3l3.1 4.7-1.4 4.9-4.4 5.6-3.7 4.7-5.3 7.1-3.2 5.7.3.4h.7l12-2.6 6.4-1.1 7.6-1.3 3.5 1.6.4 1.6-1.4 3.4-8.2 2-9.6 2-14.3 3.3-.2.1.2.3 6.4.6 2.8.2h6.8l12.6 1 3.3 2 1.9 2.7-.3 2-5.1 2.6-6.8-1.6-16-3.8-5.4-1.3h-.8v.4l4.6 4.5 8.3 7.5L89 80.1l.5 2.4-1.3 2-1.4-.2-9.2-7-3.6-3-8-6.8h-.5v.7l1.8 2.7 9.8 14.7.5 4.5-.7 1.4-2.6 1-2.7-.6-5.8-8-6-9-4.7-8.2-.5.4-2.9 30.2-1.3 1.5-3 1.2-2.5-2-1.4-3 1.4-6.2 1.6-8 1.3-6.4 1.2-7.9.7-2.6v-.2H49L43 72l-9 12.3-7.2 7.6-1.7.7-3-1.5.3-2.8L24 86l10-12.8 6-7.9 4-4.6-.1-.5h-.3L17.2 77.4l-4.7.6-2-2 .2-3 1-1 8-5.5Z"/></symbol>
+  <symbol id="s-gpt" viewBox="0 0 320 320"><path d="m297.06 130.97c7.26-21.79 4.76-45.66-6.85-65.48-17.46-30.4-52.56-46.04-86.84-38.68-15.25-17.18-37.16-26.95-60.13-26.81-35.04-.08-66.13 22.48-76.91 55.82-22.51 4.61-41.94 18.7-53.31 38.67-17.59 30.32-13.58 68.54 9.92 94.54-7.26 21.79-4.76 45.66 6.85 65.48 17.46 30.4 52.56 46.04 86.84 38.68 15.24 17.18 37.16 26.95 60.13 26.8 35.06.09 66.16-22.49 76.94-55.86 22.51-4.61 41.94-18.7 53.31-38.67 17.57-30.32 13.55-68.51-9.94-94.51zm-120.28 168.11c-14.03.02-27.62-4.89-38.39-13.88.49-.26 1.34-.73 1.89-1.07l63.72-36.8c3.26-1.85 5.26-5.32 5.24-9.07v-89.83l26.93 15.55c.29.14.48.42.52.74v74.39c-.04 33.08-26.83 59.9-59.91 59.97zm-128.84-55.03c-7.03-12.14-9.56-26.37-7.15-40.18.47.28 1.3.79 1.89 1.13l63.72 36.8c3.23 1.89 7.23 1.89 10.47 0l77.79-44.92v31.1c.02.32-.13.63-.38.83l-64.41 37.19c-28.69 16.52-65.33 6.7-81.92-21.95zm-16.77-139.09c7-12.16 18.05-21.46 31.21-26.29 0 .55-.03 1.52-.03 2.2v73.61c-.02 3.74 1.98 7.21 5.23 9.06l77.79 44.91-26.93 15.55c-.27.18-.61.21-.91.08l-64.42-37.22c-28.63-16.58-38.45-53.21-21.95-81.89zm221.26 51.49-77.79-44.92 26.93-15.54c.27-.18.61-.21.91-.08l64.42 37.19c28.68 16.57 38.51 53.26 21.94 81.94-7.01 12.14-18.05 21.44-31.2 26.28v-75.81c.03-3.74-1.96-7.2-5.2-9.06zm26.8-40.34c-.47-.29-1.3-.79-1.89-1.13l-63.72-36.8c-3.23-1.89-7.23-1.89-10.47 0l-77.79 44.92v-31.1c-.02-.32.13-.63.38-.83l64.41-37.16c28.69-16.55 65.37-6.7 81.91 22 6.99 12.12 9.52 26.31 7.15 40.1zm-168.51 55.43-26.94-15.55c-.29-.14-.48-.42-.52-.74v-74.39c.02-33.12 26.89-59.96 60.01-59.94 14.01 0 27.57 4.92 38.34 13.88-.49.26-1.33.73-1.89 1.07l-63.72 36.8c-3.26 1.85-5.26 5.31-5.24 9.06l-.04 89.79zm14.63-31.54 34.65-20.01 34.65 20v40.01l-34.65 20-34.65-20z"/></symbol>
+</svg>
+
+<header class="barra">
+  <div class="ample">
+    <a class="marca" href="#inici" aria-label="tallat, a l'inici">
+      <img class="wm wm-clar" src="wordmark-marro.png" alt="tallat" width="929" height="223">
+      <img class="wm wm-fosc" src="wordmark-crema.png" alt="tallat" width="929" height="223">
+    </a>
+    <nav aria-label="Apartats">
+      <ul>
+        <li><a href="#que-es">Què és</a></li>
+        <li><a href="#que-necessites">Què necessites</a></li>
+        <li><a href="#installacio">Instal·lació</a></li>
+        <li><a href="#primer-video">El primer vídeo</a></li>
+        <li><a href="#funcions">Funcions</a></li>
+        <li><a href="#trucs">Trucs i preguntes</a></li>
+        <li><a href="#comentaris">Comentaris</a></li>
+        <li><a href="#propers-passos">Què ve després</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="portada" id="inici">
+  <div class="fons-portada" aria-hidden="true"><div class="textura" data-velocitat="0.35"></div></div>
+  <div class="ample">
+    <div class="vidre">
+      <div class="marca-gran">
+        <img class="wm wm-clar" src="wordmark-marro.png" alt="tallat" width="929" height="223">
+        <img class="wm wm-fosc" src="wordmark-crema.png" alt="tallat" width="929" height="223">
+      </div>
+      <h1>Edites el reel en el que et dura un cafè.</h1>
+      <p class="lead">Et graves parlant a càmera i retalles el vídeo com si retallessis un text: les paraules que treus desapareixen del vídeo. En català, gratis i al teu ordinador.</p>
+      <div class="pindoles">
+        <a class="pindola" href="#installacio">Instal·la'l</a>
+        <a class="pindola secundaria" href="#primer-video">Mira com funciona</a>
+      </div>
+      <p class="meta">Guia de la versió 0 · Octubre de 2026 · Ivet Anoro</p>
+    </div>
+    <div class="escena">
+      <div class="mobil" data-velocitat="-0.06" aria-hidden="true">
+        <div class="video"><p class="karaoke"><span>en</span> <span>el</span> <span>que</span> <span>et</span> <span>dura</span> <span>un cafè</span></p></div>
+      </div>
+      <div class="prova" data-velocitat="-0.12" aria-labelledby="titol-prova">
+        <p class="etiq" id="titol-prova">Prova-ho: toca les paraules que sobren</p>
+        <p class="frase" id="frase"></p>
+        <div class="compte">
+          <span class="durada" aria-live="polite" id="durada"></span>
+          <small>Els «eh» i els «mmm», tallat ja els treu sol.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <section id="que-es">
+    <div class="ample">
+      <div class="columna">
+        <div class="capcal">
+          <span class="num">1 · Què és</span>
+          <h2>Un editor de reels que entén el català.</h2>
+          <p>tallat funciona dins de l'app de Claude. Li dius «edita aquest vídeo» i t'obre una pàgina on veus tot el que has dit, escrit. Treus les paraules que no vols i el vídeo queda tallat.</p>
+        </div>
+      </div>
+      <div class="cami puja" aria-label="Com funciona, en tres passos">
+        <div class="targeta"><span class="gran">Grava't</span><p>Parlant a càmera, com sempre. Els errors es treuen després.</p></div>
+        <svg class="fletxa" viewBox="0 0 64 32" aria-hidden="true"><path d="M4 21C17 11 35 10 52 17M44 10l9 7-10 5"/></svg>
+        <div class="targeta"><span class="gran">Treu paraules</span><p>Selecciones el que sobra al text i prems <kbd>⌫</kbd>.</p></div>
+        <svg class="fletxa" viewBox="0 0 64 32" aria-hidden="true"><path d="M4 21C17 11 35 10 52 17M44 10l9 7-10 5"/></svg>
+        <div class="targeta"><span class="gran">Exporta</span><p>Vertical, amb subtítols, a punt per penjar.</p></div>
+      </div>
+      <div class="graella-3 mes-aire">
+        <div class="targeta puja">
+          <span class="icona"><svg viewBox="0 0 24 24"><path d="M8 7 3 12l5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></span>
+          <h3>Gratuït i obert</h3><p>No es paga. El codi és públic i qualsevol el pot mirar o millorar.</p>
+        </div>
+        <div class="targeta puja">
+          <span class="icona"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></svg></span>
+          <h3>Al teu ordinador</h3><p>Els teus vídeos no es pugen enlloc. La pàgina d'editar només s'obre des del teu Mac.</p>
+        </div>
+        <div class="targeta puja">
+          <span class="icona"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
+          <h3>Per a qui parla a càmera</h3><p>Per a qui fa reels, TikToks o Shorts parlant i no vol aprendre a fer servir un editor.</p>
+        </div>
+      </div>
+      <div class="columna mes-aire">
+        <div class="nota amb-insignia puja">
+          <span class="v0" aria-hidden="true">V0</span>
+          <div class="text-nota">
+          <strong>És una versió 0.</strong>
+          <p>Funciona, però és el primer cop que la fa servir gent de fora. Si alguna cosa falla o no s'entén, explica-m'ho: és la millor manera que tinc de saber què cal arreglar.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="que-necessites" class="torrat">
+    <div class="ample">
+      <div class="columna">
+        <div class="capcal">
+          <span class="num">2 · Què necessites</span>
+          <h2>Un Mac i l'app de Claude.</h2>
+          <p>La resta, tallat ho instal·la sol.</p>
+        </div>
+      </div>
+      <div class="graella-3">
+        <div class="targeta puja">
+          <span class="icona"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></svg></span>
+          <div class="fila"><h3>Un Mac</h3><span class="etiqueta">Imprescindible</span></div>
+          <p>De moment només funciona en Mac. També el pots fer servir en els Mac nous (M1, M2, M3…), tot i que s'ha provat sobretot en un Mac amb processador Intel.</p>
+        </div>
+        <div class="targeta puja">
+          <span class="icona"><svg class="ple" viewBox="0 0 100 100"><use href="#s-claude"/></svg></span>
+          <div class="fila"><h3>L'app de Claude, amb Claude Code</h3><span class="etiqueta">Imprescindible</span></div>
+          <p>L'app d'escriptori de Claude amb un pla que inclogui Claude Code: el més barat és el Pro. També funciona amb Codex, el de ChatGPT, si el teu pla l'inclou.</p>
+        </div>
+        <div class="targeta puja">
+          <span class="icona"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span>
+          <div class="fila"><h3>Uns 5 GB lliures</h3><span class="etiqueta">Imprescindible</span></div>
+          <p>Per al que s'instal·la, i a més l'espai dels teus vídeos.</p>
+        </div>
+      </div>
+      <div class="graella mes-aire" style="max-width:46rem">
+        <div class="targeta puja">
+          <span class="icona"><svg viewBox="0 0 24 24"><path d="M4 7h10M4 12h16M4 17h12"/></svg></span>
+          <div class="fila"><h3>Descript connectat a Claude</h3><span class="etiqueta blau">Opcional</span></div>
+          <p>Transcriu més de pressa i conserva els «eh» i els «mmm», perquè els puguis treure. Sense Descript, tallat transcriu al teu Mac: va més lent i el primer cop baixa 3 GB més.</p>
+        </div>
+        <div class="targeta puja">
+          <span class="icona"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></svg></span>
+          <div class="fila"><h3>Una IA d'imatge o de vídeo</h3><span class="etiqueta blau">Opcional</span></div>
+          <p>Krea, Higgsfield, OpenArt, Adobe Firefly… connectada a Claude, si vols que et generi el b-roll. Abans de gastar-ne crèdits, Claude sempre t'ho pregunta.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="installacio">
+    <div class="ample">
+      <div class="columna">
+        <div class="capcal">
+          <span class="num">3 · Instal·lació</span>
+          <h2>Tres passos, sense terminal.</h2>
+          <p>Trigarà uns 10 o 20 minuts el primer cop. No et demanarà la contrasenya del Mac.</p>
+        </div>
+      </div>
+      <div class="tria">
+        <div class="targeta puja">
+          <span class="logo claude" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#s-claude"/></svg></span>
+          <div class="fila"><h3>Amb Claude</h3><span class="etiqueta blau">El que et recomano</span></div>
+          <p>A l'app de Claude, a la pestanya <strong>Code</strong>. Segueix els tres passos d'aquí sota.</p>
+        </div>
+        <div class="targeta puja">
+          <span class="logo" aria-hidden="true"><svg viewBox="0 0 320 320"><use href="#s-gpt"/></svg></span>
+          <div class="fila"><h3>Amb ChatGPT</h3><span class="etiqueta">Codex</span></div>
+          <p>Si fas servir Codex, el de ChatGPT, mira el desplegable <strong>Amb Codex</strong>, més avall.</p>
+        </div>
+      </div>
+      <div class="dos-cols mes-aire">
+        <ol class="passos">
+          <li><h3>Obre l'app de Claude i tria la pestanya Code</h3>
+            <div><p>Ha de ser <strong>Code</strong>, no el xat normal (<strong>Chat</strong>) ni Cowork: només a Code, Claude pot instal·lar coses al teu Mac. Si encara no tens l'app, la pots baixar de <a href="https://claude.com/download">claude.com/download</a>.</p></div></li>
+          <li><h3>Escriu aquestes dues línies, d'una en una</h3>
+            <div>
+              <p>Copia la primera, enganxa-la al xat i prem Retorn. Quan acabi, fes el mateix amb la segona.</p>
+              <div class="ordres">
+                <div class="ordre"><code>/plugin marketplace add ivetanoro/tallat</code><button class="copia" type="button" data-copia="/plugin marketplace add ivetanoro/tallat">Copia</button></div>
+                <div class="ordre"><code>/plugin install tallat@tallat</code><button class="copia" type="button" data-copia="/plugin install tallat@tallat">Copia</button></div>
+              </div>
+            </div></li>
+          <li><h3>Escriu «instal·la tallat»</h3>
+            <div><p>Claude baixa i prepara tot el que tallat necessita (uns 2 o 3 GB). Cada cop que et demani permís per fer alguna cosa, clica <strong>Permet</strong>. Quan acabi, et dirà que tot és a punt.</p></div></li>
+        </ol>
+        <div class="enganxa puja">
+          <div class="finestra" role="img" aria-label="Dibuix de l'app de Claude a la pestanya Code, amb una ordre escrita al xat.">
+            <div class="punts" aria-hidden="true"><i></i><i></i><i></i><span>Claude</span></div>
+            <div class="app" aria-hidden="true">
+              <div class="modes"><span>Chat</span><span>Cowork</span><span class="actiu">Code</span></div>
+              <div class="bombolla-claude"><svg viewBox="0 0 100 100"><use href="#s-claude"/></svg><span id="resposta-claude">Hola! Què vols fer avui?</span></div>
+              <div class="compositor"><code id="maquina">/plugin marketplace add ivetanoro/tallat</code><span class="envia"><svg viewBox="0 0 16 16"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"/></svg></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="columna mes-aire">
+        <details>
+          <summary>Una altra manera: baixant la carpeta</summary>
+          <div>
+            <p>1. Ves a <a href="https://github.com/ivetanoro/tallat">github.com/ivetanoro/tallat</a>, clica el botó verd <strong>Code</strong> i després <strong>Download ZIP</strong>. Fes doble clic al fitxer per descomprimir-lo.</p>
+            <p>2. A l'app de Claude, a la pestanya <strong>Code</strong>, obre la carpeta <strong>tallat</strong> que acabes de descomprimir. Si et pregunta si confies en aquesta carpeta, digues que sí.</p>
+            <p>3. Escriu <strong>«instal·la tallat»</strong>.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Amb Codex (ChatGPT)</summary>
+          <div>
+            <p>Baixa la carpeta com a l'apartat d'aquí sobre, obre-la amb Codex i escriu <strong>«instal·la tallat»</strong>. Tot funciona igual. Només canvien els connectors opcionals, com Descript, que depenen de si aquests serveis en tenen per a Codex.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="primer-video" class="rentat">
+    <div class="ample">
+      <div class="columna">
+        <div class="capcal">
+          <span class="num">4 · El teu primer vídeo</span>
+          <h2>De la gravació al vídeo penjable.</h2>
+          <p>Aquest és el camí sencer, de principi a final.</p>
+        </div>
+        <ol class="passos">
+          <li><h3>Grava't parlant</h3>
+            <div><p>Amb el mòbil o amb la càmera, com sempre. No cal que surti perfecte: els errors, els «eh» i les pauses llargues es treuen després.</p>
+            <p>Si et vols estalviar feina, pots donar instruccions mentre graves, com <strong>«Claude, torno a començar»</strong>. Les trobaràs a <a href="#funcions">Funcions</a>.</p></div></li>
+          <li><h3>Passa el vídeo a Claude</h3>
+            <div><p>Copia el vídeo al Mac. A la pestanya <strong>Code</strong>, escriu <strong>«edita aquest vídeo»</strong> i arrossega-hi el fitxer. Claude el transcriu i et diu quan és a punt. Amb Descript, un vídeo de 8 minuts triga uns 5 minuts; sense, una mica més.</p></div></li>
+          <li><h3>S'obre la pàgina d'editar</h3>
+            <div><p>S'obre al navegador. El primer cop, una visita guiada t'ensenya cada part. La pots tornar a veure amb el botó <strong>?</strong>, al costat del nom del vídeo.</p></div></li>
+        </ol>
+      </div>
+      <div class="mig mes-aire puja">
+        <div class="finestra pagina-tallat" role="img" aria-label="Dibuix de la pàgina d'editar: a l'esquerra les pestanyes, al mig el text amb paraules ratllades, a la dreta el vídeo vertical amb subtítols.">
+          <div class="punts" aria-hidden="true"><i></i><i></i><i></i><span>tallat · el meu primer reel</span></div>
+          <div class="dins" aria-hidden="true">
+            <div class="costat"><span>Edita</span><span>Subtítols</span><span>Gràfics</span><span>So</span></div>
+            <div class="texte">
+              <span class="tret-sol">Ehm,</span> avui us vull ensenyar <span class="tret">com, com</span> com edito un reel <span class="pausa">0,6 s</span> en el que et dura un cafè. <span class="tret-sol">Mmm,</span> <span class="proposta">o sigui,</span> sense saber res d'edició.
+            </div>
+            <div class="dreta">
+              <div class="mobil"><div class="video"><p class="karaoke"><span>en</span> <span>el</span> <span>que</span> <span>et</span> <span>dura</span> <span>un cafè</span></p></div></div>
+              <span class="interruptor"><i></i>Escolta cada tall</span>
+            </div>
+          </div>
+        </div>
+        <div class="peus" aria-hidden="true"><span>A l'esquerra, les pestanyes.</span><span>Al mig, el que has dit.</span><span>A la dreta, el vídeo tal com quedarà.</span></div>
+      </div>
+      <div class="columna mes-aire">
+        <ol class="passos" style="counter-reset: pas 3">
+          <li><h3>Retalla tocant el text</h3>
+            <div>
+              <p>Selecciona les paraules que no vols, com en un document, i prem <kbd>⌫</kbd>. Desapareixen del vídeo. Si les tornes a seleccionar i prems <kbd>⌫</kbd>, tornen.</p>
+              <p>A la pàgina hi veuràs tres colors: <span class="tret-sol">en taronja</span>, el que tallat ja ha tret sol (els «eh», els «mmm»); <span class="proposta">subratllat en groc</span>, el que et proposa treure («vale», «o sigui»), i decideixes tu; i ratllat en gris, el que has tret tu.</p>
+              <p>Cada cop que treus una paraula, sonen uns segons al voltant del tall perquè sentis com queda. Si no ho vols, apaga <strong>Escolta cada tall</strong>, sota el vídeo.</p>
+            </div></li>
+          <li><h3>Tria els subtítols, els gràfics i el so</h3>
+            <div><p>Les pestanyes de l'esquerra: <strong>Subtítols</strong> (l'estil, les lletres, els colors), <strong>Gràfics</strong> (el títol del principi, les frases destacades, el b-roll) i <strong>So</strong> (la neteja de la veu i els efectes). Ho pots tocar també directament al vídeo.</p>
+            <p>Si vols gràfics, digues a Claude <strong>«proposa'm gràfics»</strong> i te'n proposa frase a frase. Els veuràs en petit a la pestanya <strong>Gràfics</strong>: si en toques un, el pots canviar o treure.</p></div></li>
+        </ol>
+      </div>
+      <div class="dos-cols mig mes-aire">
+        <ol class="passos" style="counter-reset: pas 5">
+          <li><h3>Exporta un esborrany i mira'l</h3>
+            <div><p>Clica <strong>Exporta</strong>, a dalt, i després <strong>Esborrany</strong>. És ràpid. Si vols canviar alguna cosa, digues-ho a Claude amb el segon que veus sota el vídeo: «al segon 12, el b-roll és massa llarg».</p></div></li>
+          <li><h3>Exporta el vídeo final</h3>
+            <div><p><strong>Exporta → Vídeo final</strong>, en 1080 o en 4K, vertical i a punt per penjar. Si el vols acabar en un altre programa, tria <strong>Per acabar-lo en un altre editor</strong>: Premiere, Final Cut, DaVinci Resolve, CapCut o iMovie.</p></div></li>
+        </ol>
+        <div class="puja" style="display:grid;justify-items:center">
+          <div class="full" role="img" aria-label="Dibuix del full d'exportar: Esborrany, Vídeo final o Per acabar-lo en un altre editor.">
+            <p class="etiq">Exporta</p>
+            <div class="opcio triada"><b>Esborrany</b><em>ràpid</em><span>Per mirar-lo sencer</span></div>
+            <div class="opcio"><b>Vídeo final</b><em>1080 · 4K</em><span>A punt per penjar</span></div>
+            <div class="opcio"><b>Per a un altre editor</b><em>Premiere…</em><span>Per acabar-lo tu</span></div>
+            <div class="barra-progres"><i></i></div>
+            <small>Exportant l'esborrany…</small>
+          </div>
+        </div>
+      </div>
+      <div class="columna mes-aire">
+        <div class="flux">
+          <h3>Dreceres de la pàgina</h3>
+          <dl class="dreceres">
+            <div><dt>Escoltar des d'una paraula</dt><dd>clic a la paraula</dd></div>
+            <div><dt>Treure o recuperar paraules</dt><dd>selecciona-les i <kbd>⌫</kbd></dd></div>
+            <div><dt>Reproduir o aturar</dt><dd><kbd>espai</kbd></dd></div>
+            <div><dt>Desfer</dt><dd><kbd>⌘</kbd><kbd>Z</kbd></dd></div>
+            <div><dt>Refer</dt><dd><kbd>⇧</kbd><kbd>⌘</kbd><kbd>Z</kbd></dd></div>
+            <div><dt>Moure un paràgraf</dt><dd>arrossega la nansa <kbd>⠿</kbd></dd></div>
+            <div><dt>Destacar una paraula als subtítols</dt><dd><strong>Destaca</strong>, a dalt, i clic</dd></div>
+            <div><dt>Amagar la columna de l'esquerra</dt><dd><kbd>⌃</kbd><kbd>⌘</kbd><kbd>S</kbd></dd></div>
+          </dl>
+          <p>I en qualsevol moment pots demanar canvis a Claude amb paraules: «treu la primera frase», «fes-me tres reels d'aquesta gravació», «posa-hi un sticker d'una estrella quan dic <em>genial</em>».</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="funcions">
+    <div class="ample">
+      <div class="columna">
+        <div class="capcal">
+          <span class="num">5 · Funcions</span>
+          <h2>Tot el que pot fer.</h2>
+          <p>No cal que ho facis servir tot. Comença retallant, i la resta, quan et vingui de gust.</p>
+        </div>
+      </div>
+      <div class="graella-3">
+        <div class="targeta puja">
+          <div class="visual"><p class="v-neteja"><s>Eh,</s> avui us vull <s>mmm,</s> ensenyar <s>vale,</s> una cosa</p></div>
+          <h3>Neteja sola</h3><p>Treu els «eh» i els «mmm», et proposa els «vale» i els «o sigui», i escurça els silencis llargs. Amb <strong>Silencis</strong> tries com de curts.</p>
+        </div>
+        <div class="targeta puja">
+          <div class="visual mini"><div class="mobil"><div class="video"><p class="karaoke"><span>els</span> <span>teus</span> <span>subtítols</span></p></div></div></div>
+          <h3>Subtítols animats</h3><p>18 estils per començar (Clàssic, Karaoke, Neó, Apilat…), 18 lletres gratuïtes o la teva, i paraules destacades. El que veus a la pàgina és el que surt al vídeo.</p>
+        </div>
+        <div class="targeta puja">
+          <div class="visual"><div class="v-noti"><i></i><b>tallat</b><span>3 trucs per gravar millor</span></div></div>
+          <h3>Gràfics</h3><p>Frases clau, llistes, notificacions, xats, números que compten, notes a mà, captures de webs, fotos en ventall i la crida del final. Claude te'ls proposa frase a frase.</p>
+        </div>
+        <div class="targeta puja">
+          <div class="visual"><div class="v-ona" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i class="silenci"></i><i class="silenci"></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+          <h3>So</h3><p>Neteja la veu (treu el soroll de fons i iguala el volum al de les xarxes) i hi pots afegir efectes de so.</p>
+        </div>
+        <div class="targeta puja">
+          <div class="visual"><div class="v-reels" aria-hidden="true"><i></i><i></i><i></i></div></div>
+          <h3>Reels d'una gravació llarga</h3><p>Si et graves molta estona, Claude et proposa entre un i cinc reels, cadascun amb el seu ganxo i el seu final.</p>
+        </div>
+        <div class="targeta puja">
+          <div class="visual"><div class="v-estil" aria-hidden="true"><i style="background:var(--text)"></i><i style="background:var(--accent)"></i><i style="background:var(--fons-2)"></i><span>Aa</span></div></div>
+          <h3>El teu estil</h3><p>Tries els teus colors i les teves lletres en quatre passos, i els subtítols, els títols i els gràfics els fan servir sols. Pots tenir-ne uns quants.</p>
+        </div>
+      </div>
+      <div class="destacat mes-aire puja">
+        <div class="destacat-cap">
+          <span class="num">Mentre graves</span>
+          <h3 class="titol-destacat">Instruccions de veu</h3>
+          <p>Comença la frase amb «Claude» (o amb «tallat») i digues què vols. tallat les troba a la gravació, les treu del vídeo i, a la pàgina, decideixes si les acceptes.</p>
+        </div>
+        <div class="ordres-veu">
+          <div class="ordre-veu"><p class="diu">«<b>Claude,</b> torno a començar»</p><p>La presa bona comença aquí: es treu l'intent d'abans.</p></div>
+          <div class="ordre-veu"><p class="diu">«<b>Claude,</b> zoom aquí»</p><p>El tros que ve s'apropa una mica.</p></div>
+          <div class="ordre-veu"><p class="diu">«<b>Claude,</b> aquí un b-roll d'un vinil girant»</p><p>Queda apuntat a la pàgina perquè hi posis o hi generis aquella imatge.</p></div>
+          <div class="ordre-veu"><p class="diu">«<b>Claude,</b> sticker d'un cor»</p><p>El mateix, amb un sticker.</p></div>
+        </div>
+        <p class="truc"><strong>Truc:</strong> fes una petita pausa abans de «Claude» i digues l'ordre d'una tirada. Si te n'oblides i dius només «sticker d'un cor», tallat també la troba, però no en treu res fins que hi dius que sí a la pàgina. I si dius «un tallat amb llet», no passa res.</p>
+      </div>
+      <div class="mes-aire-gran">
+        <h3 class="subtitol">I encara més</h3>
+        <ul class="funcions-llista">
+          <li><h3>Escolta cada tall</h3><p>En treure una paraula, sents al moment com ha quedat el tall, amb el so tal com sortirà al vídeo.</p></li>
+          <li><h3>Canvia l'ordre</h3><p>Arrossega un paràgraf a un altre lloc i el vídeo sona en aquest ordre nou.</p></li>
+          <li><h3>Títol del ganxo</h3><p>Un text dissenyat per als primers segons: en esglaó, com un rètol, a màquina d'escriure…</p></li>
+          <li><h3>B-roll i stickers</h3><p>Amb fitxers teus o generats amb IA: a pantalla sencera, en una targeta, en una finestra petita o amb la pantalla partida.</p></li>
+          <li><h3>Recorda el teu gust</h3><p>Si dius a Claude «els subtítols, més grans», et pregunta si és per sempre i ho aplica als vídeos següents.</p></li>
+          <li><h3>Per a altres editors</h3><p>L'exportes com a projecte de Premiere, Final Cut o DaVinci Resolve, o en trossos per a CapCut i iMovie.</p></li>
+          <li><h3>Bloc de color</h3><p>El vídeo es fa petit a baix i el gràfic surt a dalt, sobre el teu color. S'activa tocant el gràfic al vídeo.</p></li>
+          <li><h3>Comparteix el teu estil</h3><p>Al menú <strong>…</strong> del teu estil, <strong>Exporta</strong> el desa en un fitxer .zip per passar-lo a qui vulguis.</p></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="trucs" class="torrat">
+    <div class="columna">
+      <div class="capcal">
+        <span class="num">6 · Trucs i preguntes</span>
+        <h2>Si alguna cosa no va.</h2>
+      </div>
+      <div>
+        <details>
+          <summary>Claude diu que no pot instal·lar res, o que «en aquest entorn» no pot</summary>
+          <div><p>Ets al xat normal (la pestanya <strong>Chat</strong>) o a Cowork. Ves a la pestanya <strong>Code</strong> de l'app de Claude i torna a començar.</p></div>
+        </details>
+        <details>
+          <summary>Alguna cosa ha fallat i no sé què és</summary>
+          <div><p>Escriu a Claude <strong>«comprova tallat»</strong>. Revisa cada peça i et diu què falta. També pots tornar a demanar <strong>«instal·la tallat»</strong> tantes vegades com vulguis: no toca els teus vídeos ni els teus projectes, només fa el que ha quedat a mitges.</p></div>
+        </details>
+        <details>
+          <summary>Quant costa?</summary>
+          <div><p>tallat és gratuït. El que necessites és un pla de Claude que inclogui Claude Code (el Pro) o un de ChatGPT que inclogui Codex. Descript i les IA d'imatge són opcionals i es paguen a part, cadascuna al seu servei.</p></div>
+        </details>
+        <details>
+          <summary>On es guarden els vídeos?</summary>
+          <div><p>Cada vídeo exportat es desa a la carpeta del projecte. Si en tries una altra, per exemple Baixades, també hi va, i tallat se'n recorda per als vídeos següents. Els teus estils i les teves preferències es guarden en una carpeta de tallat dins del teu usuari del Mac.</p></div>
+        </details>
+        <details>
+          <summary>És privat?</summary>
+          <div><p>Sí. Tot es fa al teu ordinador i la pàgina d'editar només s'obre des del teu Mac. Si fas servir Descript, l'àudio es puja al teu compte de Descript per transcriure'l. Si generes b-roll amb IA, la descripció de la imatge va a aquell servei.</p></div>
+        </details>
+        <details>
+          <summary>Funciona si parlo en castellà o en anglès?</summary>
+          <div><p>Està pensat per al català, i és on va millor. Si hi barreges alguna frase en castellà o en anglès, també la talla.</p></div>
+        </details>
+        <details>
+          <summary>Per què el vídeo va a trossos just després de tallar?</summary>
+          <div><p>Després de cada canvi, tallat prepara el vídeo seguit en segon pla. Mentre el prepara, el reproductor salta d'un tros a l'altre. Al cap d'uns segons (més, si el vídeo és llarg) ja sona seguit. El vídeo exportat sempre surt net.</p></div>
+        </details>
+        <details>
+          <summary>Com faig que surti millor?</summary>
+          <div>
+            <p><strong>Deixa una petita pausa entre frases</strong>: els talls queden més nets.</p>
+            <p><strong>Si et pots connectar Descript</strong>, fes-ho: el text surt millor i va més de pressa.</p>
+            <p><strong>Mira sempre l'esborrany</strong> abans d'exportar el vídeo final.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="comentaris">
+    <div class="ample">
+      <div class="columna">
+        <div class="capcal">
+          <span class="num">7 · Comentaris</span>
+          <h2>Explica'm com t'ha anat.</h2>
+          <p>El que em diguis decidirà què arreglo i què faig després.</p>
+        </div>
+      </div>
+      <div class="contacte mig">
+        <a class="targeta puja" href="https://www.instagram.com/ivetanoro/">
+          <span class="logo" aria-hidden="true"><svg class="linia" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="0.6"/></svg></span>
+          <span class="etiq">Instagram · missatge directe</span>
+          <span class="gran">@ivetanoro</span>
+          <p>On em vas demanar tallat. És el més ràpid.</p>
+        </a>
+        <a class="targeta puja" href="https://github.com/ivetanoro/tallat/issues">
+          <span class="logo" aria-hidden="true"><svg class="linia" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16v.5"/></svg></span>
+          <span class="etiq">GitHub · avisos</span>
+          <span class="gran">tallat/issues</span>
+          <p>Si tens compte a GitHub i vols deixar-ho per escrit.</p>
+        </a>
+      </div>
+      <div class="exemple-missatge mig mes-aire puja">
+        <p class="etiq">Un missatge així m'ajuda molt</p>
+        <div class="dm">
+          <p>Hola! Exportava l'esborrany d'un vídeo de 3 minuts i ha sortit sense subtítols. T'envio una captura de la pàgina 👇</p>
+        </div>
+        <p class="peu-dm">Explica'm què feies, què esperaves que passés i què ha passat. Si pots, afegeix-hi una captura. Si tallat no s'instal·la, envia'm el que respon Claude quan li dius «comprova tallat».</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="propers-passos" class="torrat">
+    <div class="ample">
+      <div class="columna">
+        <div class="capcal">
+          <span class="num">8 · Què ve després</span>
+          <h2>Idees per a les properes versions.</h2>
+          <p>Són idees, no promeses. L'ordre dependrà del que em digueu.</p>
+        </div>
+      </div>
+      <div class="idees">
+        <div class="targeta puja"><span class="etiqueta blau">Idea</span><h3>Windows</h3><p>Que tallat funcioni també en ordinadors amb Windows.</p></div>
+        <div class="targeta puja"><span class="etiqueta blau">Proves</span><h3>Els Mac nous</h3><p>Ja s'hi pot instal·lar, però encara s'ha provat poc en els Mac amb xip M1, M2, M3 o posteriors. Si en tens un, explica'm com t'ha anat.</p></div>
+        <div class="targeta puja"><span class="etiqueta blau">Idea</span><h3>Editar des del mòbil</h3><p>Obrir la pàgina d'editar des del telèfon, per retallar des del sofà.</p></div>
+        <div class="targeta puja"><span class="etiqueta blau">Idea</span><h3>Més coses des del xat</h3><p>Corregir una paraula mal escrita o canviar l'estil dels subtítols només dient-ho a Claude.</p></div>
+        <div class="targeta puja"><span class="etiqueta blau">Idea</span><h3>Obrir-lo amb doble clic</h3><p>Una icona per obrir els teus projectes sense haver de passar per Claude.</p></div>
+        <div class="targeta puja"><span class="etiqueta blau">Idea</span><h3>Encara més ràpid</h3><p>Aprofitar els temps de cada paraula que dona Descript, perquè la transcripció no s'hagi d'esperar.</p></div>
+        <div class="targeta puja"><span class="etiqueta blau">Idea</span><h3>El teu estil sense exemples</h3><p>Crear el teu estil encara que no tinguis cap reel de referència, responent unes preguntes.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="cafe" aria-labelledby="titol-cafe">
+    <div class="ample">
+      <div class="convida puja">
+        <div class="convida-text">
+          <span class="num">Una última cosa</span>
+          <h2 id="titol-cafe">T'ha estalviat temps?</h2>
+          <p>tallat és gratuït i ho continuarà sent. Si vols, amb el que val un cafè m'ajudes a continuar-lo millorant.</p>
+        </div>
+        <a class="pindola" href="https://ko-fi.com/tallat">Convida'm a un tallat ☕</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="peu">
+  <div class="ample">
+    <div class="marca-peu">
+      <img class="wm wm-clar" src="wordmark-marro.png" alt="tallat" width="929" height="223">
+      <img class="wm wm-fosc" src="wordmark-crema.png" alt="tallat" width="929" height="223">
+    </div>
+    <p class="signa">Fet per Ivet Anoro</p>
+    <p>tallat és de codi obert (llicència AGPL v3). Els vídeos que en surtin són teus.<br>
+      <a href="https://github.com/ivetanoro/tallat">github.com/ivetanoro/tallat</a> · <a href="https://www.instagram.com/ivetanoro/">@ivetanoro</a></p>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const quiet = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // --- La prova de la portada: una frase com a la pàgina d'editar ---
+  const MOTS = [
+    ["Eh,", true], ["avui", false], ["us", false], ["vull", false], ["ensenyar,", false], ["mmm,", true],
+    ["com", false], ["edito", false], ["un", false], ["reel", false], ["o", false], ["sigui,", false],
+    ["en", false], ["el", false], ["que", false], ["et", false], ["dura", false], ["un", false], ["cafè.", false],
+  ];
+  const durada = (t, auto) => auto ? 0.55 : 0.12 + 0.045 * t.replace(/[^\p{L}]/gu, "").length;  // segons, aproximats
+  const total = MOTS.reduce((s, [t, a]) => s + durada(t, a), 0);
+  const frase = document.getElementById("frase");
+  const sortida = document.getElementById("durada");
+  const fmt = (x) => x.toFixed(1).replace(".", ",") + " s";
+  let mostrat = total;
+  const botons = MOTS.map(([text, auto]) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "mot";
+    b.textContent = text;
+    b.setAttribute("aria-pressed", "false");
+    b.dataset.durada = durada(text, auto);
+    b.dataset.auto = auto ? "1" : "";
+    b.addEventListener("click", () => {
+      b.setAttribute("aria-pressed", String(b.getAttribute("aria-pressed") !== "true"));
+      compta();
+    });
+    frase.append(b, " ");
+    return b;
+  });
+  const queda = () => botons.filter((b) => b.getAttribute("aria-pressed") !== "true").reduce((s, b) => s + Number(b.dataset.durada), 0);
+  const pinta = (x) => { sortida.innerHTML = `<s>${fmt(total)}</s> → ${fmt(x)}`; };
+  function compta() {
+    const objectiu = queda(), de = mostrat, inici = performance.now();
+    if (quiet) { mostrat = objectiu; pinta(objectiu); return; }
+    const pas = (ara) => {
+      const x = Math.min(1, Math.max(0, (ara - inici) / 450)), e = 1 - Math.pow(1 - x, 3);
+      mostrat = de + (objectiu - de) * e;
+      pinta(mostrat);
+      if (x < 1) requestAnimationFrame(pas);
+    };
+    requestAnimationFrame(pas);
+  }
+  pinta(total);
+  // En obrir la pàgina, tallat ratlla sol els «eh» i els «mmm», un darrere l'altre.
+  botons.filter((b) => b.dataset.auto).forEach((b, i) =>
+    setTimeout(() => { b.setAttribute("aria-pressed", "true"); compta(); }, quiet ? 0 : 900 + i * 650));
+
+  // --- Copiar les ordres de la instal·lació ---
+  for (const b of document.querySelectorAll(".copia")) {
+    b.addEventListener("click", () => {
+      const fet = () => { b.textContent = "Copiat"; setTimeout(() => { b.textContent = "Copia"; }, 1600); };
+      const selecciona = () => {
+        const r = document.createRange();
+        r.selectNodeContents(b.previousElementSibling);
+        const s = getSelection();
+        s.removeAllRanges();
+        s.addRange(r);
+        b.textContent = "Prem ⌘C";
+      };
+      try { navigator.clipboard.writeText(b.dataset.copia).then(fet, selecciona); } catch { selecciona(); }
+    });
+  }
+
+  // --- La màquina d'escriure de l'app de Claude (només mentre es veu) ---
+  const maquina = document.getElementById("maquina");
+  const resposta = document.getElementById("resposta-claude");
+  const GUIO = [
+    ["/plugin marketplace add ivetanoro/tallat", "Afegit. Ara la segona línia."],
+    ["/plugin install tallat@tallat", "Fet. Ara digues-me «instal·la tallat»."],
+    ["instal·la tallat", "Preparant tallat… Clica Permet quan t'ho demani."],
+  ];
+  let visible = false, corrent = false;
+  const espera = (ms) => new Promise((r) => setTimeout(r, ms));
+  async function escriu() {
+    if (corrent || quiet) return;
+    corrent = true;
+    for (let k = 0; visible; k = (k + 1) % GUIO.length) {
+      const [ordre, diu] = GUIO[k];
+      maquina.textContent = "";
+      for (const c of ordre) { if (!visible) break; maquina.textContent += c; await espera(45 + Math.random() * 40); }
+      await espera(500);
+      resposta.textContent = diu;
+      await espera(2200);
+    }
+    corrent = false;
+  }
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) escriu(); }, { threshold: 0.4 })
+      .observe(maquina.closest(".finestra"));
+  }
+
+  // --- Parallax: la textura del cafè va més a poc a poc que la pàgina; les targetes de la portada, una mica més de pressa ---
+  const capes = [...document.querySelectorAll("[data-velocitat]")];
+  const ample = matchMedia("(min-width: 900px)");
+  let pendent = false;
+  function mou() {
+    pendent = false;
+    const y = scrollY;
+    const actiu = ample.matches && !quiet && y < innerHeight * 1.5;
+    for (const c of capes) c.style.transform = actiu ? `translate3d(0, ${(y * Number(c.dataset.velocitat)).toFixed(1)}px, 0)` : "";
+  }
+  addEventListener("scroll", () => { if (!pendent) { pendent = true; requestAnimationFrame(mou); } }, { passive: true });
+  if (ample.addEventListener) ample.addEventListener("change", mou);
+  mou();
+})();
+</script>
+
+
+</body></html>
