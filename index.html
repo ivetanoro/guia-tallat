@@ -281,6 +281,11 @@ h2 { margin: 0; font: 700 var(--t-h2)/1.08 var(--font-display); letter-spacing: 
   background: var(--accent); color: var(--accent-text); font: 800 1.5rem/1 var(--font-display); letter-spacing: -0.02em;
   rotate: -6deg;
 }
+/* L'avís de les actualitzacions: sota la de la versió 0, en blau perquè es vegi. */
+.nota + .avis-novetats { margin-top: 14px; }
+.v0.actualitza { rotate: 0deg; background: color-mix(in srgb, var(--accent-text) 12%, transparent); }
+.v0.actualitza svg { width: 30px; height: 30px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.nota.blava a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 2px; }
 
 /* Com funciona: tres passos amb fletxes dibuixades */
 .cami { display: grid; gap: 16px; grid-template-columns: 1fr; align-items: stretch; }
@@ -348,7 +353,7 @@ h2 { margin: 0; font: 700 var(--t-h2)/1.08 var(--font-display); letter-spacing: 
 .ordres { display: grid; gap: 8px; }
 .ordre { display: flex; align-items: center; gap: 10px; min-width: 0; background: var(--superficie); border: 1px solid var(--linia); border-radius: 14px; padding: 10px 10px 10px 14px; }
 .ordre code { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; font: 0.9375rem/1.4 var(--mono); color: var(--text); }
-details p code { font: 0.92em/1 var(--mono); padding: 0.12em 0.4em; border-radius: 6px; background: color-mix(in srgb, var(--text) 8%, transparent); white-space: nowrap; }
+.nota code, details p code { font: 0.92em/1 var(--mono); padding: 0.12em 0.4em; border-radius: 6px; background: color-mix(in srgb, var(--text) 8%, transparent); white-space: nowrap; }
 .copia { flex: none; font: 600 0.8125rem/1 var(--font); color: var(--accent-text); background: var(--accent); border: 0; border-radius: 99px; padding: 9px 15px; cursor: pointer; transition: transform 0.15s; }
 .copia:active { transform: scale(0.96); }
 
@@ -590,6 +595,13 @@ kbd { display: inline-block; min-width: 1.7em; padding: 1px 6px; text-align: cen
           <div class="text-nota">
           <strong>És una versió 0.</strong>
           <p>Funciona, però és el primer cop que la fa servir gent de fora. Si alguna cosa falla o no s'entén, explica-m'ho: és la millor manera que tinc de saber què cal arreglar.</p>
+          </div>
+        </div>
+        <div class="nota amb-insignia blava avis-novetats puja">
+          <span class="v0 actualitza" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16M20 20v-4h-4"/></svg></span>
+          <div class="text-nota">
+          <strong>Important: activa les actualitzacions.</strong>
+          <p>Com que és una versió 0, aniran arribant arreglos i millores sovint. Quan l'hagis instal·lat, escriu <code>/plugin</code> a Claude, ves a <strong>Marketplaces</strong>, tria <strong>tallat</strong> i activa <strong>Enable auto-update</strong>: t'arribaran soles. Si vas baixar la carpeta, mira <a href="#novetats">com tenir les novetats</a>.</p>
           </div>
         </div>
       </div>
@@ -867,7 +879,7 @@ kbd { display: inline-block; min-width: 1.7em; padding: 1px 6px; text-align: cen
           <summary>Alguna cosa ha fallat i no sé què és</summary>
           <div><p>Escriu a Claude <strong>«comprova tallat»</strong>. Revisa cada peça i et diu què falta. També pots tornar a demanar <strong>«instal·la tallat»</strong> tantes vegades com vulguis: no toca els teus vídeos ni els teus projectes, només fa el que ha quedat a mitges.</p></div>
         </details>
-        <details>
+        <details id="novetats">
           <summary>Com tinc les novetats de tallat?</summary>
           <div>
             <p><strong>Si l'has instal·lat com a connector</strong> (les dues línies), escriu <code>/plugin</code>, ves a <strong>Marketplaces</strong>, tria <strong>tallat</strong> i activa <strong>Enable auto-update</strong>. A partir d'aleshores, les versions noves t'arriben soles. Si no ho actives, de tant en tant escriu <code>/plugin marketplace update tallat</code> i obre una sessió nova.</p>
@@ -1091,6 +1103,11 @@ kbd { display: inline-block; min-width: 1.7em; padding: 1px 6px; text-align: cen
   addEventListener("scroll", () => { if (!pendent) { pendent = true; requestAnimationFrame(mou); } }, { passive: true });
   if (ample.addEventListener) ample.addEventListener("change", mou);
   mou();
+
+  // --- L'enllaç de l'avís obre la pregunta de les novetats ---
+  const obreNovetats = () => { if (location.hash === "#novetats") document.getElementById("novetats").open = true; };
+  addEventListener("hashchange", obreNovetats);
+  obreNovetats();
 })();
 </script>
 
