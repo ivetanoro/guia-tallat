@@ -348,6 +348,7 @@ h2 { margin: 0; font: 700 var(--t-h2)/1.08 var(--font-display); letter-spacing: 
 .ordres { display: grid; gap: 8px; }
 .ordre { display: flex; align-items: center; gap: 10px; min-width: 0; background: var(--superficie); border: 1px solid var(--linia); border-radius: 14px; padding: 10px 10px 10px 14px; }
 .ordre code { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; font: 0.9375rem/1.4 var(--mono); color: var(--text); }
+details p code { font: 0.92em/1 var(--mono); padding: 0.12em 0.4em; border-radius: 6px; background: color-mix(in srgb, var(--text) 8%, transparent); white-space: nowrap; }
 .copia { flex: none; font: 600 0.8125rem/1 var(--font); color: var(--accent-text); background: var(--accent); border: 0; border-radius: 99px; padding: 9px 15px; cursor: pointer; transition: transform 0.15s; }
 .copia:active { transform: scale(0.96); }
 
@@ -865,6 +866,13 @@ kbd { display: inline-block; min-width: 1.7em; padding: 1px 6px; text-align: cen
         <details>
           <summary>Alguna cosa ha fallat i no sé què és</summary>
           <div><p>Escriu a Claude <strong>«comprova tallat»</strong>. Revisa cada peça i et diu què falta. També pots tornar a demanar <strong>«instal·la tallat»</strong> tantes vegades com vulguis: no toca els teus vídeos ni els teus projectes, només fa el que ha quedat a mitges.</p></div>
+        </details>
+        <details>
+          <summary>Com tinc les novetats de tallat?</summary>
+          <div>
+            <p><strong>Si l'has instal·lat com a connector</strong> (les dues línies), escriu <code>/plugin</code>, ves a <strong>Marketplaces</strong>, tria <strong>tallat</strong> i activa <strong>Enable auto-update</strong>. A partir d'aleshores, les versions noves t'arriben soles. Si no ho actives, de tant en tant escriu <code>/plugin marketplace update tallat</code> i obre una sessió nova.</p>
+            <p><strong>Si vas baixar la carpeta</strong> (el ZIP, o amb Codex), torna-la a baixar de GitHub, posa-la al lloc de l'antiga i digues <strong>«instal·la tallat»</strong>. No perds res: els teus estils, les preferències i els projectes són fora d'aquesta carpeta, i la instal·lació només refà el que falta, així que va de pressa.</p>
+          </div>
         </details>
         <details>
           <summary>Quant costa?</summary>
