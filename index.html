@@ -377,6 +377,12 @@ details > div strong { color: var(--text); }
 .tret { color: var(--text-3); text-decoration: line-through; }
 .tret-sol { color: var(--app-taronja); text-decoration: line-through; }
 .proposta { box-shadow: inset 0 -2px 0 var(--app-groc); background: var(--app-groc-suau); border-radius: 3px; padding: 0 2px; }
+/* La paraula marcada i la seva barreta (Destaca, Corregeix, Treu), com a la pàgina. */
+.marcada { position: relative; background: color-mix(in srgb, var(--accent) 45%, transparent); border-radius: 4px; padding: 0 2px; }
+.barreta-dibuix {
+  position: absolute; left: -2px; bottom: calc(100% + 6px); white-space: nowrap;
+  font-size: 0.62rem; line-height: 1; padding: 5px 9px; border-radius: 8px; background: var(--text); color: var(--fons);
+}
 .pagina-tallat .dreta { border-left: 1px solid var(--linia); padding: 14px; display: grid; place-items: center; gap: 10px; }
 .pagina-tallat .mobil { width: 6.6rem; border-radius: 18px; padding: 5px; }
 .pagina-tallat .mobil .video { inset: 5px; border-radius: 14px; }
@@ -734,12 +740,12 @@ kbd { display: inline-block; min-width: 1.7em; padding: 1px 6px; text-align: cen
         </ol>
       </div>
       <div class="mig mes-aire puja">
-        <div class="finestra pagina-tallat" role="img" aria-label="Dibuix de la pàgina d'editar: a l'esquerra les pestanyes, al mig el text amb paraules ratllades, a la dreta el vídeo vertical amb subtítols.">
+        <div class="finestra pagina-tallat" role="img" aria-label="Dibuix de la pàgina d'editar: a l'esquerra el que cal revisar i com es veu, al mig el text amb paraules ratllades i la barreta d'una paraula marcada, a la dreta el vídeo vertical amb subtítols.">
           <div class="punts" aria-hidden="true"><i></i><i></i><i></i><span>tallat · el meu primer reel</span></div>
           <div class="dins" aria-hidden="true">
-            <div class="costat"><span>Edita</span><span>Subtítols</span><span>Gràfics</span><span>So</span></div>
+            <div class="costat"><span>Per revisar</span><span>Estil</span><span>Subtítols</span><span>Títol</span><span>Gràfics</span><span>B-roll</span><span>So</span></div>
             <div class="texte">
-              <span class="tret-sol">Ehm,</span> avui us vull ensenyar <span class="tret">com, com</span> com edito un reel <span class="pausa">0,6 s</span> en el que et dura un cafè. <span class="tret-sol">Mmm,</span> <span class="proposta">o sigui,</span> sense saber res d'edició.
+              <span class="tret-sol">Ehm,</span> avui us vull ensenyar <span class="tret">com, com</span> com edito un reel <span class="pausa">0,6 s</span> en el que et dura un <span class="marcada">cafè<span class="barreta-dibuix">Destaca · Corregeix · Treu</span></span>. <span class="tret-sol">Mmm,</span> <span class="proposta">o sigui,</span> sense saber res d'edició.
             </div>
             <div class="dreta">
               <div class="mobil"><div class="video"><p class="karaoke"><span>en</span> <span>el</span> <span>que</span> <span>et</span> <span>dura</span> <span>un cafè</span></p></div></div>
@@ -747,19 +753,21 @@ kbd { display: inline-block; min-width: 1.7em; padding: 1px 6px; text-align: cen
             </div>
           </div>
         </div>
-        <div class="peus" aria-hidden="true"><span>A l'esquerra, les pestanyes.</span><span>Al mig, el que has dit.</span><span>A la dreta, el vídeo tal com quedarà.</span></div>
+        <div class="peus" aria-hidden="true"><span>A l'esquerra, què revisar i com es veu.</span><span>Al mig, el que has dit.</span><span>A la dreta, el vídeo tal com quedarà.</span></div>
       </div>
       <div class="columna mes-aire">
         <ol class="passos" style="counter-reset: pas 3">
           <li><h3>Retalla tocant el text</h3>
             <div>
               <p>Selecciona les paraules que no vols, com en un document, i prem <kbd>⌫</kbd>. Desapareixen del vídeo. Si les tornes a seleccionar i prems <kbd>⌫</kbd>, tornen.</p>
-              <p>A la pàgina hi veuràs tres colors: <span class="tret-sol">en taronja</span>, el que tallat ja ha tret sol (els «eh», els «mmm»); <span class="proposta">subratllat en groc</span>, el que et proposa treure («vale», «o sigui»), i decideixes tu; i ratllat en gris, el que has tret tu.</p>
+              <p>A la pàgina hi veuràs tres colors: <span class="tret-sol">en taronja</span>, el que tallat ja ha tret sol (els «eh», els «mmm»); <span class="proposta">subratllat en groc</span>, el que et proposa treure («vale», «o sigui»), i decideixes tu; i ratllat en gris, el que has tret tu. En <strong>negreta</strong>, les paraules que surten destacades als subtítols.</p>
+              <p>Si toques una paraula, a sobre surt una barreta: <strong>Destaca</strong> (<kbd>⌘B</kbd>) la fa sortir més gran als subtítols, <strong>Corregeix</strong> (<kbd>↩</kbd>) en canvia com s'escriu i <strong>Treu</strong> (<kbd>⌫</kbd>) la treu del vídeo.</p>
+              <p>A dalt de l'esquerra, a <strong>Per revisar</strong>, hi ha el que tallat t'ha trobat: les instruccions de veu i les paraules que potser vols treure.</p>
               <p>Cada cop que treus una paraula, sonen uns segons al voltant del tall perquè sentis com queda. Si no ho vols, apaga <strong>Escolta cada tall</strong>, sota el vídeo.</p>
             </div></li>
-          <li><h3>Tria els subtítols, els gràfics i el so</h3>
-            <div><p>Les pestanyes de l'esquerra: <strong>Subtítols</strong> (l'estil, les lletres, els colors), <strong>Gràfics</strong> (el títol del principi, les frases destacades, el b-roll) i <strong>So</strong> (la neteja de la veu i els efectes). Ho pots tocar també directament al vídeo.</p>
-            <p>Si vols gràfics, digues a Claude <strong>«proposa'm gràfics»</strong> i te'n proposa frase a frase. Els veuràs en petit a la pestanya <strong>Gràfics</strong>: si en toques un, el pots canviar o treure.</p></div></li>
+          <li><h3>Tria com es veu</h3>
+            <div><p>A l'esquerra, a <strong>Com es veu</strong>: l'<strong>Estil</strong> (els teus colors i lletres), els <strong>Subtítols</strong>, el <strong>Títol del ganxo</strong>, els <strong>Gràfics</strong>, el <strong>B-roll</strong> i el <strong>So</strong> (la neteja de la veu i els efectes). Cada fila obre el seu panell, i <strong>‹ Enrere</strong> hi torna. A sota, a <strong>Ritme</strong>, tries com de curts vols els silencis. Ho pots tocar també directament al vídeo.</p>
+            <p>Si vols gràfics, digues a Claude <strong>«proposa'm gràfics»</strong> i te'n proposa frase a frase. Els veuràs a <strong>Com es veu → Gràfics</strong>: si en toques un, el pots canviar o treure.</p></div></li>
         </ol>
       </div>
       <div class="dos-cols mig mes-aire">
