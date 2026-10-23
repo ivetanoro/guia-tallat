@@ -281,6 +281,14 @@ h2 { margin: 0; font: 700 var(--t-h2)/1.08 var(--font-display); letter-spacing: 
   background: var(--accent); color: var(--accent-text); font: 800 1.5rem/1 var(--font-display); letter-spacing: -0.02em;
   rotate: -6deg;
 }
+/* Novetats: què ha canviat a cada versió, de la més nova a la més antiga. */
+.titol-versions { font: 700 1.25rem/1.2 var(--font-display); letter-spacing: -0.01em; margin-bottom: 14px; }
+.versions-llista { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.versions-llista li { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); align-items: baseline; gap: 2px 18px; padding: 18px 22px; border-radius: 20px; background: var(--superficie); box-shadow: var(--ombra); }
+.versions-llista .versio { font: 700 1.125rem/1.2 var(--font-display); grid-row: span 2; }
+.versions-llista .data { font-size: 0.8125rem; color: var(--text-2); }
+.versions-llista p { color: var(--text-2); }
+@media (max-width: 600px) { .versions-llista li { grid-template-columns: 1fr; } .versions-llista .versio { grid-row: auto; } }
 /* L'avís de les actualitzacions: sota la de la versió 0, en blau perquè es vegi. */
 .nota + .avis-novetats { margin-top: 14px; }
 .v0.actualitza { rotate: 0deg; background: color-mix(in srgb, var(--accent-text) 12%, transparent); }
@@ -354,6 +362,7 @@ h2 { margin: 0; font: 700 var(--t-h2)/1.08 var(--font-display); letter-spacing: 
 .ordre { display: flex; align-items: center; gap: 10px; min-width: 0; background: var(--superficie); border: 1px solid var(--linia); border-radius: 14px; padding: 10px 10px 10px 14px; }
 .ordre code { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; font: 0.9375rem/1.4 var(--mono); color: var(--text); }
 .nota code, details p code { font: 0.92em/1 var(--mono); padding: 0.12em 0.4em; border-radius: 6px; background: color-mix(in srgb, var(--text) 8%, transparent); white-space: nowrap; }
+.targeta p code { font: 0.9em/1.5 var(--mono); padding: 0.1em 0.35em; border-radius: 6px; background: color-mix(in srgb, var(--text) 8%, transparent); overflow-wrap: anywhere; }
 .copia { flex: none; font: 600 0.8125rem/1 var(--font); color: var(--accent-text); background: var(--accent); border: 0; border-radius: 99px; padding: 9px 15px; cursor: pointer; transition: transform 0.15s; }
 .copia:active { transform: scale(0.96); }
 
@@ -526,6 +535,7 @@ kbd { display: inline-block; min-width: 1.7em; padding: 1px 6px; text-align: cen
         <li><a href="#funcions">Funcions</a></li>
         <li><a href="#trucs">Trucs i preguntes</a></li>
         <li><a href="#comentaris">Comentaris</a></li>
+        <li><a href="#novetats-versions">Novetats</a></li>
         <li><a href="#propers-passos">Què ve després</a></li>
       </ul>
     </nav>
@@ -607,7 +617,7 @@ kbd { display: inline-block; min-width: 1.7em; padding: 1px 6px; text-align: cen
           <span class="v0 actualitza" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16M20 20v-4h-4"/></svg></span>
           <div class="text-nota">
           <strong>Important: activa les actualitzacions.</strong>
-          <p>Com que és una versió 0, aniran arribant arreglos i millores sovint. Quan l'hagis instal·lat, escriu <code>/plugin</code> a Claude, ves a <strong>Marketplaces</strong>, tria <strong>tallat</strong> i activa <strong>Enable auto-update</strong>: t'arribaran soles. Si vas baixar la carpeta, mira <a href="#novetats">com tenir les novetats</a>.</p>
+          <p>Com que és una versió 0, aniran arribant arreglos i millores sovint. Quan l'hagis instal·lat, escriu <code>/plugin</code> a Claude, ves a <strong>Marketplaces</strong>, tria <strong>tallat</strong> i activa <strong>Enable auto-update</strong>: t'arribaran soles. Si vas baixar la carpeta, mira <a href="#novetats-versions">Novetats</a>.</p>
           </div>
         </div>
       </div>
@@ -627,7 +637,7 @@ kbd { display: inline-block; min-width: 1.7em; padding: 1px 6px; text-align: cen
         <div class="targeta puja">
           <span class="icona"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></svg></span>
           <div class="fila"><h3>Un Mac</h3><span class="etiqueta">Imprescindible</span></div>
-          <p>De moment només funciona en Mac. També el pots fer servir en els Mac nous (M1, M2, M3…), tot i que s'ha provat sobretot en un Mac amb processador Intel.</p>
+          <p>Funciona en Mac, també en els nous (M1, M2, M3…), tot i que s'ha provat sobretot en un Mac amb processador Intel. A Windows ja es pot provar: és <a href="#novetats-versions">en proves</a>.</p>
         </div>
         <div class="targeta puja">
           <span class="icona"><svg class="ple" viewBox="0 0 100 100"><use href="#s-claude"/></svg></span>
@@ -889,10 +899,7 @@ kbd { display: inline-block; min-width: 1.7em; padding: 1px 6px; text-align: cen
         </details>
         <details id="novetats">
           <summary>Com tinc les novetats de tallat?</summary>
-          <div>
-            <p><strong>Si l'has instal·lat com a connector</strong> (les dues línies), escriu <code>/plugin</code>, ves a <strong>Marketplaces</strong>, tria <strong>tallat</strong> i activa <strong>Enable auto-update</strong>. A partir d'aleshores, les versions noves t'arriben soles. Si no ho actives, de tant en tant escriu <code>/plugin marketplace update tallat</code> i obre una sessió nova.</p>
-            <p><strong>Si vas baixar la carpeta</strong> (el ZIP, o amb Codex), torna-la a baixar de GitHub, posa-la al lloc de l'antiga i digues <strong>«instal·la tallat»</strong>. No perds res: els teus estils, les preferències i els projectes són fora d'aquesta carpeta, i la instal·lació només refà el que falta, així que va de pressa.</p>
-          </div>
+          <div><p>Ho tens tot a <a href="#novetats-versions">Novetats</a>: la versió d'ara, què ha canviat i com actualitzar-la (com a connector o si vas baixar la carpeta).</p></div>
         </details>
         <details>
           <summary>Quant costa?</summary>
@@ -959,18 +966,79 @@ kbd { display: inline-block; min-width: 1.7em; padding: 1px 6px; text-align: cen
     </div>
   </section>
 
-  <section id="propers-passos" class="torrat">
+  <section id="novetats-versions" class="torrat">
     <div class="ample">
       <div class="columna">
         <div class="capcal">
-          <span class="num">8 · Què ve després</span>
+          <span class="num">8 · Novetats</span>
+          <h2>La versió d'ara, i com tenir-la.</h2>
+          <p>Aquí hi ha sempre l'última versió, què ha canviat i com t'arriba. Si dubtes de res, aquest és el lloc.</p>
+        </div>
+      </div>
+      <div class="columna mes-aire">
+        <div class="nota amb-insignia blava puja">
+          <span class="v0 actualitza" aria-hidden="true">0.7</span>
+          <div class="text-nota">
+          <strong>Versió 0.7.1 · 23 d'octubre de 2026</strong>
+          <p>La pàgina d'editar, molt més senzilla. Si la vas instal·lar abans d'aquest dia, actualitza-la (a sota tens com).</p>
+          </div>
+        </div>
+      </div>
+      <div class="graella-3 mes-aire">
+        <div class="targeta puja">
+          <span class="icona"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16M20 20v-4h-4"/></svg></span>
+          <h3>Si la tens com a connector</h3>
+          <p>A la pestanya <strong>Code</strong> de Claude, escriu <code>/plugin marketplace update tallat</code> i obre una sessió nova.</p>
+        </div>
+        <div class="targeta puja">
+          <span class="icona"><svg viewBox="0 0 24 24"><path d="M12 3v10M8 9l4 4 4-4"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg></span>
+          <h3>Perquè t'arribin soles</h3>
+          <p>Escriu <code>/plugin</code>, ves a <strong>Marketplaces</strong>, tria <strong>tallat</strong> i activa <strong>Enable auto-update</strong>. Només cal fer-ho un cop.</p>
+        </div>
+        <div class="targeta puja">
+          <span class="icona"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>
+          <h3>Si vas baixar la carpeta</h3>
+          <p>També amb Codex: torna-la a baixar de GitHub, posa-la al lloc de l'antiga i digues <strong>«instal·la tallat»</strong>. No perds res: els teus estils i els projectes són fora d'aquesta carpeta.</p>
+        </div>
+      </div>
+      <div class="graella mes-aire" style="max-width:46rem">
+        <div class="targeta puja">
+          <span class="icona"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></svg></span>
+          <div class="fila"><h3>Windows</h3><span class="etiqueta blau">En proves</span></div>
+          <p>Ja s'hi pot instal·lar, igual que al Mac: amb les dues línies i <strong>«instal·la tallat»</strong>. Passa totes les proves automàtiques, però encara no l'ha fet servir ningú en un ordinador de debò. Si en tens un, prova-ho i explica'm com t'ha anat.</p>
+        </div>
+        <div class="targeta puja">
+          <span class="icona"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M10 18h4"/></svg></span>
+          <div class="fila"><h3>Els Mac nous</h3><span class="etiqueta blau">En proves</span></div>
+          <p>Funciona en els Mac amb xip M1, M2, M3 o posteriors, però s'ha provat sobretot en un Mac amb processador Intel. Si en tens un, explica'm com t'ha anat.</p>
+        </div>
+      </div>
+      <div class="columna mes-aire">
+        <h3 class="titol-versions">Què ha canviat a cada versió</h3>
+        <ol class="versions-llista">
+          <li class="puja"><span class="versio">0.7.1</span><span class="data">23 d'octubre</span>
+            <p>Al Safari, el vídeo ja no s'encalla quan salta d'un tall a l'altre. Al text, en negreta només les paraules que destaques tu (les que tria tallat, una mica més gruixudes), i els silencis escurçats es veuen més discrets.</p></li>
+          <li class="puja"><span class="versio">0.7.0</span><span class="data">23 d'octubre</span>
+            <p>La pàgina d'editar, molt més senzilla. A l'esquerra, <strong>Per revisar</strong> (el que t'ha proposat tallat) i <strong>Com es veu</strong> (l'estil, els subtítols, el títol, els gràfics, el b-roll i el so, cadascun amb el seu panell). Al text, un sol mode: toca una paraula i a sobre surt una barreta per destacar-la (<kbd>⌘B</kbd>), corregir-la (<kbd>↩</kbd>) o treure-la (<kbd>⌫</kbd>). Els reels, en un desplegable a dalt, i <strong>Ritme</strong> per triar com de curts vols els silencis.</p></li>
+          <li class="puja"><span class="versio">0.6.0</span><span class="data">22 d'octubre</span>
+            <p>Windows, en proves. Les pauses amb clics de teclat o de ratolí a dins ara s'escurcen senceres.</p></li>
+          <li class="puja"><span class="versio">0.5.0</span><span class="data">15 d'octubre</span>
+            <p>La primera versió pública.</p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="propers-passos">
+    <div class="ample">
+      <div class="columna">
+        <div class="capcal">
+          <span class="num">9 · Què ve després</span>
           <h2>Idees per a les properes versions.</h2>
           <p>Són idees, no promeses. L'ordre dependrà del que em digueu.</p>
         </div>
       </div>
       <div class="idees">
-        <div class="targeta puja"><span class="etiqueta blau">Idea</span><h3>Windows</h3><p>Que tallat funcioni també en ordinadors amb Windows.</p></div>
-        <div class="targeta puja"><span class="etiqueta blau">Proves</span><h3>Els Mac nous</h3><p>Ja s'hi pot instal·lar, però encara s'ha provat poc en els Mac amb xip M1, M2, M3 o posteriors. Si en tens un, explica'm com t'ha anat.</p></div>
         <div class="targeta puja"><span class="etiqueta blau">Idea</span><h3>Editar des del mòbil</h3><p>Obrir la pàgina d'editar des del telèfon, per retallar des del sofà.</p></div>
         <div class="targeta puja"><span class="etiqueta blau">Idea</span><h3>Més coses des del xat</h3><p>Corregir una paraula mal escrita o canviar l'estil dels subtítols només dient-ho a Claude.</p></div>
         <div class="targeta puja"><span class="etiqueta blau">Idea</span><h3>Obrir-lo amb doble clic</h3><p>Una icona per obrir els teus projectes sense haver de passar per Claude.</p></div>
