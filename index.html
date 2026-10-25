@@ -746,24 +746,25 @@ kbd { display: inline-block; min-width: 1.7em; padding: 1px 6px; text-align: cen
           <li><h3>Passa el vídeo a Claude</h3>
             <div><p>Copia el vídeo a l'ordinador. A la pestanya <strong>Code</strong>, escriu <strong>«edita aquest vídeo»</strong> i arrossega-hi el fitxer. Claude el transcriu i et diu quan és a punt. Amb Descript, un vídeo de 8 minuts triga uns 5 minuts; sense, una mica més.</p></div></li>
           <li><h3>S'obre la pàgina d'editar</h3>
-            <div><p>S'obre al navegador. El primer cop, una visita guiada t'ensenya cada part. La pots tornar a veure amb el botó <strong>?</strong>, al costat del nom del vídeo.</p></div></li>
+            <div><p>S'obre al navegador. El primer cop, una visita guiada t'ensenya cada part. La pots tornar a veure amb el botó <strong>?</strong>, al costat del nom del vídeo.</p>
+            <p>A dalt a l'esquerra hi ha tres estacions: <strong>Edita</strong> (el text), <strong>Vesteix</strong> (com es veu) i <strong>Revisa</strong> (l'esborrany sencer, amb notes per a Claude). Pots anar endavant i enrere quan vulguis.</p></div></li>
         </ol>
       </div>
       <div class="mig mes-aire puja">
-        <div class="finestra pagina-tallat" role="img" aria-label="Dibuix de la pàgina d'editar: a l'esquerra el que cal revisar i com es veu, al mig el text amb paraules ratllades i la barreta d'una paraula marcada, a la dreta el vídeo vertical amb subtítols.">
+        <div class="finestra pagina-tallat" role="img" aria-label="Dibuix de la pàgina, a Edita: a l'esquerra les tres estacions, el que cal revisar i el ritme; al mig el text amb paraules ratllades i la barreta d'una paraula marcada; a la dreta el vídeo vertical amb subtítols i, a sota, les notes per a Claude.">
           <div class="punts" aria-hidden="true"><i></i><i></i><i></i><span>tallat · el meu primer reel</span></div>
           <div class="dins" aria-hidden="true">
-            <div class="costat"><span>Per revisar</span><span>Estil</span><span>Subtítols</span><span>Títol</span><span>Gràfics</span><span>B-roll</span><span>So</span></div>
+            <div class="costat"><span>Edita</span><span>Per revisar</span><span>Ritme</span></div>
             <div class="texte">
               <span class="tret-sol">Ehm,</span> avui us vull ensenyar <span class="tret">com, com</span> com edito un reel <span class="pausa">0,6 s</span> en el que et dura un <span class="marcada">cafè<span class="barreta-dibuix">Destaca · Corregeix · Treu</span></span>. <span class="tret-sol">Mmm,</span> <span class="proposta">o sigui,</span> sense saber res d'edició.
             </div>
             <div class="dreta">
               <div class="mobil"><div class="video"><p class="karaoke"><span>en</span> <span>el</span> <span>que</span> <span>et</span> <span>dura</span> <span>un cafè</span></p></div></div>
-              <span class="interruptor"><i></i>Escolta cada tall</span>
+              <span class="interruptor">Notes per a Claude</span>
             </div>
           </div>
         </div>
-        <div class="peus" aria-hidden="true"><span>A l'esquerra, què revisar i com es veu.</span><span>Al mig, el que has dit.</span><span>A la dreta, el vídeo tal com quedarà.</span></div>
+        <div class="peus" aria-hidden="true"><span>A l'esquerra, les estacions, què revisar i el ritme.</span><span>Al mig, el que has dit.</span><span>A la dreta, el vídeo tal com quedarà.</span></div>
       </div>
       <div class="columna mes-aire">
         <ol class="passos" style="counter-reset: pas 3">
@@ -772,18 +773,19 @@ kbd { display: inline-block; min-width: 1.7em; padding: 1px 6px; text-align: cen
               <p>Selecciona les paraules que no vols, com en un document, i prem <kbd data-win="Retrocés">⌫</kbd>. Desapareixen del vídeo. Si les tornes a seleccionar i prems <kbd data-win="Retrocés">⌫</kbd>, tornen.</p>
               <p>A la pàgina hi veuràs tres colors: <span class="tret-sol">en taronja</span>, el que tallat ja ha tret sol (els «eh», els «mmm»); <span class="proposta">subratllat en groc</span>, el que et proposa treure («vale», «o sigui»), i decideixes tu; i ratllat en gris, el que has tret tu. En <strong>negreta</strong>, les paraules que has destacat tu, i una mica més gruixudes, les que tria tallat: totes surten més grans als subtítols.</p>
               <p>Si toques una paraula, a sobre surt una barreta: <strong>Destaca</strong> (<kbd data-win="Ctrl+B">⌘B</kbd>) la fa sortir més gran als subtítols, <strong>Corregeix</strong> (<kbd data-win="Retorn">↩</kbd>) en canvia com s'escriu i <strong>Treu</strong> (<kbd data-win="Retrocés">⌫</kbd>) la treu del vídeo.</p>
-              <p>A dalt de l'esquerra, a <strong>Per revisar</strong>, hi ha el que tallat t'ha trobat: les instruccions de veu i les paraules que potser vols treure.</p>
-              <p>Cada cop que treus una paraula, sonen uns segons al voltant del tall perquè sentis com queda. Si no ho vols, apaga <strong>Escolta cada tall</strong>, sota el vídeo.</p>
+              <p>A l'esquerra, a <strong>Per revisar</strong>, hi ha el que tallat t'ha trobat: les instruccions de veu i les paraules que potser vols treure. A sota, a <strong>Ritme</strong>, tries com de curts vols els silencis.</p>
+              <p>Si vols demanar-li alguna cosa a Claude, atura el vídeo on vulguis i escriu-ho a <strong>Notes per a Claude</strong>, a sota del vídeo (o prem <kbd>N</kbd>). Quan acabis, toca <strong>Envia a Claude</strong>: ho fa i et respon a sota de cada nota.</p>
             </div></li>
-          <li><h3>Tria com es veu</h3>
-            <div><p>A l'esquerra, a <strong>Com es veu</strong>: l'<strong>Estil</strong> (els teus colors i lletres), els <strong>Subtítols</strong>, el <strong>Títol del ganxo</strong>, els <strong>Gràfics</strong>, el <strong>B-roll</strong> i el <strong>So</strong> (la neteja de la veu i els efectes). Cada fila obre el seu panell, i <strong>‹ Enrere</strong> hi torna. A sota, a <strong>Ritme</strong>, tries com de curts vols els silencis. Ho pots tocar també directament al vídeo.</p>
-            <p>Si vols gràfics, digues a Claude <strong>«proposa'm gràfics»</strong> i te'n proposa frase a frase. Els veuràs a <strong>Com es veu → Gràfics</strong>: si en toques un, el pots canviar o treure.</p></div></li>
+          <li><h3>Vesteix-lo</h3>
+            <div><p>A <strong>Vesteix</strong>, a l'esquerra, toca <strong>Estil</strong>: hi ha sis maneres de vestir tot el vídeo d'un sol toc (els subtítols, el títol, els gràfics i el b-roll), sempre amb els teus <strong>Colors i lletres</strong>. Els <strong>Subtítols</strong> i el <strong>Títol del ganxo</strong> es retoquen a la dreta.</p>
+            <p>A sota hi ha les <strong>Peces</strong>: gràfics, b-roll, zooms i so. Atura el vídeo on vulguis i toca'n una: s'hi afegeix, i a la dreta la retoques o la treus (<kbd data-win="Retrocés">⌫</kbd>). Si vols que te'n proposi Claude, toca <strong>Demana-li gràfics a Claude</strong>.</p>
+            <p>El que canvies és només d'aquest vídeo. Si t'agrada, <strong>Fes-lo servir en tots els vídeos</strong>.</p></div></li>
         </ol>
       </div>
       <div class="dos-cols mig mes-aire">
         <ol class="passos" style="counter-reset: pas 5">
           <li><h3>Exporta un esborrany i mira'l</h3>
-            <div><p>Clica <strong>Exporta</strong>, a dalt, i després <strong>Esborrany</strong>. És ràpid. Si vols canviar alguna cosa, digues-ho a Claude amb el segon que veus sota el vídeo: «al segon 12, el b-roll és massa llarg».</p></div></li>
+            <div><p>Ves a <strong>Revisa</strong> i toca <strong>Fes l'esborrany</strong> (o <strong>Exporta → Esborrany</strong>). Hi veus el vídeo sencer, tal com quedarà. Atura'l on vulguis canviar alguna cosa i deixa-hi una nota: cada nota guarda el moment i una miniatura. Envia-les a Claude, que les fa i en treu una versió nova. Així fins que t'agradi.</p></div></li>
           <li><h3>Exporta el vídeo final</h3>
             <div><p><strong>Exporta → Vídeo final</strong>, en 1080 o en 4K, vertical i a punt per penjar. Si el vols acabar en un altre programa, tria <strong>Per acabar-lo en un altre editor</strong>: Premiere, Final Cut, DaVinci Resolve, CapCut o iMovie.</p></div></li>
         </ol>
@@ -808,7 +810,9 @@ kbd { display: inline-block; min-width: 1.7em; padding: 1px 6px; text-align: cen
             <div><dt>Desfer</dt><dd><kbd data-win="Ctrl">⌘</kbd><kbd>Z</kbd></dd></div>
             <div><dt>Refer</dt><dd data-win-tecles="Ctrl Maj Z"><kbd>⇧</kbd><kbd>⌘</kbd><kbd>Z</kbd></dd></div>
             <div><dt>Moure un paràgraf</dt><dd>arrossega la nansa <kbd>⠿</kbd></dd></div>
-            <div><dt>Destacar una paraula als subtítols</dt><dd><strong>Destaca</strong>, a dalt, i clic</dd></div>
+            <div><dt>Destacar una paraula als subtítols</dt><dd>marca-la i <kbd data-win="Ctrl">⌘</kbd><kbd>B</kbd></dd></div>
+            <div><dt>Deixar una nota per a Claude</dt><dd><kbd>N</kbd></dd></div>
+            <div><dt>Treure una peça, a Vesteix</dt><dd><kbd data-win="Retrocés">⌫</kbd></dd></div>
             <div><dt>Amagar la columna de l'esquerra</dt><dd data-win-tecles="Ctrl Maj E"><kbd>⌃</kbd><kbd>⌘</kbd><kbd>S</kbd></dd></div>
           </dl>
           <p>I en qualsevol moment pots demanar canvis a Claude amb paraules: «treu la primera frase», «fes-me tres reels d'aquesta gravació», «posa-hi un sticker d'una estrella quan dic <em>genial</em>».</p>
@@ -829,7 +833,7 @@ kbd { display: inline-block; min-width: 1.7em; padding: 1px 6px; text-align: cen
       <div class="graella-3">
         <div class="targeta puja">
           <div class="visual"><p class="v-neteja"><s>Eh,</s> avui us vull <s>mmm,</s> ensenyar <s>vale,</s> una cosa</p></div>
-          <h3>Neteja sola</h3><p>Treu els «eh» i els «mmm», et proposa els «vale» i els «o sigui», i escurça els silencis llargs. Amb <strong>Silencis</strong> tries com de curts.</p>
+          <h3>Neteja sola</h3><p>Treu els «eh» i els «mmm», et proposa els «vale» i els «o sigui», i escurça els silencis llargs. Amb <strong>Ritme</strong> tries com de curts.</p>
         </div>
         <div class="targeta puja">
           <div class="visual mini"><div class="mobil"><div class="video"><p class="karaoke"><span>els</span> <span>teus</span> <span>subtítols</span></p></div></div></div>
@@ -837,7 +841,7 @@ kbd { display: inline-block; min-width: 1.7em; padding: 1px 6px; text-align: cen
         </div>
         <div class="targeta puja">
           <div class="visual"><div class="v-noti"><i></i><b>tallat</b><span>3 trucs per gravar millor</span></div></div>
-          <h3>Gràfics</h3><p>Frases clau, llistes, notificacions, xats, números que compten, notes a mà, captures de webs, fotos en ventall i la crida del final. Claude te'ls proposa frase a frase.</p>
+          <h3>Gràfics</h3><p>Frases clau, llistes, notificacions, xats, números que compten, notes a mà, captures de webs, fotos en ventall i la crida del final. Els poses tu tocant-los a Vesteix, o te'ls proposa Claude.</p>
         </div>
         <div class="targeta puja">
           <div class="visual"><div class="v-ona" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i class="silenci"></i><i class="silenci"></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
@@ -849,7 +853,7 @@ kbd { display: inline-block; min-width: 1.7em; padding: 1px 6px; text-align: cen
         </div>
         <div class="targeta puja">
           <div class="visual"><div class="v-estil" aria-hidden="true"><i style="background:var(--text)"></i><i style="background:var(--accent)"></i><i style="background:var(--fons-2)"></i><span>Aa</span></div></div>
-          <h3>El teu estil</h3><p>Tries els teus colors i les teves lletres en quatre passos, i els subtítols, els títols i els gràfics els fan servir sols. Pots tenir-ne uns quants.</p>
+          <h3>Estil i colors</h3><p>Tries els teus colors i les teves lletres en dos passos, i un estil per a tot el vídeo d'un sol toc: Net, Revista, Pop, Suau, Impacte o Apilat. Cada vídeo pot tenir el seu.</p>
         </div>
       </div>
       <div class="destacat mes-aire puja">
@@ -869,14 +873,14 @@ kbd { display: inline-block; min-width: 1.7em; padding: 1px 6px; text-align: cen
       <div class="mes-aire-gran">
         <h3 class="subtitol">I encara més</h3>
         <ul class="funcions-llista">
-          <li><h3>Escolta cada tall</h3><p>En treure una paraula, sents al moment com ha quedat el tall, amb el so tal com sortirà al vídeo.</p></li>
+          <li><h3>Notes per a Claude</h3><p>Atura el vídeo, escriu què vols i envia-ho: Claude ho fa i et respon a sota de cada nota. A Revisa, cada nota porta la miniatura del seu moment.</p></li>
           <li><h3>Canvia l'ordre</h3><p>Arrossega un paràgraf a un altre lloc i el vídeo sona en aquest ordre nou.</p></li>
           <li><h3>Títol del ganxo</h3><p>Un text dissenyat per als primers segons: en esglaó, com un rètol, a màquina d'escriure…</p></li>
           <li><h3>B-roll i stickers</h3><p>Amb fitxers teus o generats amb IA: a pantalla sencera, en una targeta, en una finestra petita o amb la pantalla partida.</p></li>
           <li><h3>Recorda el teu gust</h3><p>Si dius a Claude «els subtítols, més grans», et pregunta si és per sempre i ho aplica als vídeos següents.</p></li>
           <li><h3>Per a altres editors</h3><p>L'exportes com a projecte de Premiere, Final Cut o DaVinci Resolve, o en trossos per a CapCut i iMovie.</p></li>
-          <li><h3>Bloc de color</h3><p>El vídeo es fa petit a baix i el gràfic surt a dalt, sobre el teu color. S'activa tocant el gràfic al vídeo.</p></li>
-          <li><h3>Comparteix el teu estil</h3><p>Al menú <strong>…</strong> del teu estil, <strong>Exporta</strong> el desa en un fitxer .zip per passar-lo a qui vulguis.</p></li>
+          <li><h3>Bloc de color</h3><p>El vídeo es fa petit a baix i el gràfic surt a dalt, sobre el teu color. S'activa en tocar el gràfic, a Vesteix.</p></li>
+          <li><h3>Comparteix el teu estil</h3><p>A <strong>Colors i lletres</strong>, <strong>Passa'l a algú</strong> el desa en un fitxer .zip per donar-lo a qui vulguis.</p></li>
         </ul>
       </div>
     </div>
